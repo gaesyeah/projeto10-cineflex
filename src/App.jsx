@@ -11,8 +11,8 @@ export default function App() {
 
             {/* <HomePage /> */}
             {/* <SessionsPage /> */}
-            <SeatsPage />
-            {/* <SuccessPage /> */}
+            {/* <SeatsPage /> */}
+            <SuccessPage />
         </>
     )
 }

@@ -1,42 +1,23 @@
 import styled from "styled-components"
+import { SESSIONLIST } from "../../mock"
+import Session from "../../components/Session"
 
 export default function SessionsPage() {
+    const {days, posterURL, title} = SESSIONLIST;
 
     return (
         <PageContainer>
             Selecione o horário
             <div>
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <button>14:00</button>
-                        <button>15:00</button>
-                    </ButtonsContainer>
-                </SessionContainer>
-
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <button>14:00</button>
-                        <button>15:00</button>
-                    </ButtonsContainer>
-                </SessionContainer>
-
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <button>14:00</button>
-                        <button>15:00</button>
-                    </ButtonsContainer>
-                </SessionContainer>
+                {days.map(day => <Session day={day} key={day.id}/>)}
             </div>
 
             <FooterContainer>
                 <div>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster" />
+                    <img src={posterURL} alt="poster" />
                 </div>
                 <div>
-                    <p>Tudo em todo lugar ao mesmo tempo</p>
+                    <p>{title}</p>
                 </div>
             </FooterContainer>
 
@@ -58,26 +39,7 @@ const PageContainer = styled.div`
         margin-top: 20px;
     }
 `
-const SessionContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-family: 'Roboto';
-    font-size: 20px;
-    color: #293845;
-    padding: 0 20px;
-`
-const ButtonsContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin: 20px 0;
-    button {
-        margin-right: 20px;
-    }
-    a {
-        text-decoration: none;
-    }
-`
+
 const FooterContainer = styled.div`
     width: 100%;
     height: 120px;
@@ -109,6 +71,7 @@ const FooterContainer = styled.div`
         flex-direction: column;
         align-items: flex-start;
         p {
+            margin-top: -18px;
             text-align: left;
             &:nth-child(2) {
                 margin-top: 10px;

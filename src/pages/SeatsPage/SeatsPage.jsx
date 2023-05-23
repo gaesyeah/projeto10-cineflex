@@ -1,31 +1,36 @@
 import styled from "styled-components"
+import { SEATLIST } from "../../mock"
+import Seat from "../../components/Seat"
 
 export default function SeatsPage() {
+    const {seats, movie, day, name} = SEATLIST;
 
     return (
         <PageContainer>
             Selecione o(s) assento(s)
 
             <SeatsContainer>
-                <SeatItem>01</SeatItem>
-                <SeatItem>02</SeatItem>
-                <SeatItem>03</SeatItem>
-                <SeatItem>04</SeatItem>
-                <SeatItem>05</SeatItem>
+                {seats.map(seat => <Seat seat={seat} key={seat.id}/>)}
             </SeatsContainer>
 
             <CaptionContainer>
                 <CaptionItem>
-                    <CaptionCircle />
-                    Selecionado
+                    <CaptionCircle 
+                        background={'#1AAE9E'} 
+                        border={'#0E7D71'} 
+                    />Selecionado
                 </CaptionItem>
                 <CaptionItem>
-                    <CaptionCircle />
-                    Disponível
+                    <CaptionCircle 
+                        background={'#C3CFD9'} 
+                        border={'#7B8B99'} 
+                    />Disponível
                 </CaptionItem>
                 <CaptionItem>
-                    <CaptionCircle />
-                    Indisponível
+                    <CaptionCircle 
+                        background={'#FBE192'} 
+                        border={'#F7C52B'} 
+                    />Indisponível
                 </CaptionItem>
             </CaptionContainer>
 
@@ -41,11 +46,11 @@ export default function SeatsPage() {
 
             <FooterContainer>
                 <div>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster" />
+                    <img src={movie.posterURL} alt="poster" />
                 </div>
                 <div>
-                    <p>Tudo em todo lugar ao mesmo tempo</p>
-                    <p>Sexta - 14h00</p>
+                    <p>{movie.title}</p>
+                    <p>{day.weekday} - {name}</p>
                 </div>
             </FooterContainer>
 
@@ -96,8 +101,8 @@ const CaptionContainer = styled.div`
     margin: 20px;
 `
 const CaptionCircle = styled.div`
-    border: 1px solid blue;         // Essa cor deve mudar
-    background-color: lightblue;    // Essa cor deve mudar
+    border: 1px solid ${({border}) => border};
+    background-color: ${({background}) => background};   
     height: 25px;
     width: 25px;
     border-radius: 25px;
@@ -111,19 +116,6 @@ const CaptionItem = styled.div`
     flex-direction: column;
     align-items: center;
     font-size: 12px;
-`
-const SeatItem = styled.div`
-    border: 1px solid blue;         // Essa cor deve mudar
-    background-color: lightblue;    // Essa cor deve mudar
-    height: 25px;
-    width: 25px;
-    border-radius: 25px;
-    font-family: 'Roboto';
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 5px 3px;
 `
 const FooterContainer = styled.div`
     width: 100%;
