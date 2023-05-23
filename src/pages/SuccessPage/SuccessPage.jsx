@@ -10,7 +10,7 @@ export default function SuccessPage({sucessInfos}) {
             <TextContainer>
                 <strong><p>Filme e sessão</p></strong>
                 <p>{filmName}</p>
-                <p>{filmDay} - {filmTime}</p>
+                <p>{filmDay} {filmTime}</p>
             </TextContainer>
 
             <TextContainer>
