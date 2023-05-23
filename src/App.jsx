@@ -35,9 +35,9 @@ export default function App() {
         <>
             <NavContainer>CINEFLEX</NavContainer>
 
-            <HomePage setFilmName={setFilmName}/>
+            {/* <HomePage setFilmName={setFilmName}/> */}
             {/* <SessionsPage setFilmDay={setFilmDay} setFilmTime={setFilmTime}/> */}
-            {/* <SeatsPage seatInfos={seatInfos}/> */}
+            <SeatsPage seatInfos={seatInfos}/>
             {/* <SuccessPage sucessInfos={sucessInfos}/> */}
         </>
     )
