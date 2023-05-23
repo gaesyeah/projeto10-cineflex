@@ -1,24 +1,44 @@
 import Film from "../../components/Film.jsx"
 import styled from "styled-components"
-import {FILMLIST} from "../../mock.js"
+import Loading from "../../style/Loading.jsx";
+import loadingGif from "../../../public/loading.gif"
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function HomePage({setFilmName}) {
-    return (
-        <PageContainer>
-            Selecione o filme
 
-            <ListContainer>
-                {FILMLIST.map(film => 
-                    <Film 
-                        film={film} 
-                        key={film.id} 
-                        setFilmName={setFilmName}
-                    />
-                )}
-            </ListContainer>
+    const [filmList, setFilmList] = useState([]);
 
-        </PageContainer>
-    )
+    useEffect(() => {
+        axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
+        .then((sucess) => setFilmList(sucess.data))
+        .catch((error) => console.log(error.response.data))
+    }, [])
+
+    if (filmList.length === 0){
+        return (
+            <Loading>
+                <img src={loadingGif}/>
+            </Loading>
+        );
+    } else {
+        return (
+            <PageContainer>
+                Selecione o filme
+    
+                <ListContainer>
+                    {filmList.map(film => 
+                        <Film 
+                            film={film} 
+                            key={film.id} 
+                            setFilmName={setFilmName}
+                        />
+                    )}
+                </ListContainer>
+    
+            </PageContainer>
+        )
+    }
 }
 
 const PageContainer = styled.div`

@@ -4,8 +4,12 @@ import SessionsPage from "./pages/SessionsPage/SessionsPage"
 import SeatsPage from "./pages/SeatsPage/SeatsPage"
 import SuccessPage from "./pages/SuccessPage/SuccessPage"
 import { useState } from "react"
+import axios from "axios"
 
 export default function App() {
+
+    axios.defaults.headers.common['Authorization'] = 'UqDNr1vMuiRxXaMyk5kaWHGj';
+
     const [filmName, setFilmName] = useState('');
     const [filmDay, setFilmDay] = useState('');
     const [filmTime, setFilmTime] = useState('');
