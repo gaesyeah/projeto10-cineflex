@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Seat({seat, tickets, setTickets}) {
     const {name, isAvailable} = seat;
     
-    function selectSeats(){
+    function selectSeat(){
         if (!isAvailable){
             alert('Esse assento não está disponível');
         } else{
@@ -27,7 +27,7 @@ export default function Seat({seat, tickets, setTickets}) {
             available={isAvailable}
             name={name}
             tickets={tickets}
-            onClick={selectSeats}
+            onClick={selectSeat}
         >{name.padStart(2, '0')}
         </SeatItem>
     );
