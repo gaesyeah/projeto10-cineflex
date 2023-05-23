@@ -2,13 +2,19 @@ import Film from "../../components/Film.jsx"
 import styled from "styled-components"
 import {FILMLIST} from "../../mock.js"
 
-export default function HomePage() {
+export default function HomePage({setFilmName}) {
     return (
         <PageContainer>
             Selecione o filme
 
             <ListContainer>
-                {FILMLIST.map(film => <Film film={film} key={film.id}/>)}
+                {FILMLIST.map(film => 
+                    <Film 
+                        film={film} 
+                        key={film.id} 
+                        setFilmName={setFilmName}
+                    />
+                )}
             </ListContainer>
 
         </PageContainer>

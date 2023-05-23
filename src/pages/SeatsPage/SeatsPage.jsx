@@ -2,7 +2,8 @@ import styled from "styled-components"
 import { SEATLIST } from "../../mock"
 import Seat from "../../components/Seat"
 
-export default function SeatsPage() {
+export default function SeatsPage({seatInfos}) {
+    const {tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = seatInfos;
     const {seats, movie, day, name} = SEATLIST;
 
     return (
@@ -10,7 +11,14 @@ export default function SeatsPage() {
             Selecione o(s) assento(s)
 
             <SeatsContainer>
-                {seats.map(seat => <Seat seat={seat} key={seat.id}/>)}
+                {seats.map(seat => 
+                    <Seat 
+                        seat={seat} 
+                        key={seat.id}
+                        tickets={tickets} 
+                        setTickets={setTickets} 
+                    />
+                )}
             </SeatsContainer>
 
             <CaptionContainer>
@@ -36,10 +44,18 @@ export default function SeatsPage() {
 
             <FormContainer>
                 Nome do Comprador:
-                <input placeholder="Digite seu nome..." />
+                <input 
+                    placeholder="Digite seu nome..."
+                    value={buyerName}
+                    onChange={(e) => setBuyerName(e.target.value)}
+                />
 
                 CPF do Comprador:
-                <input placeholder="Digite seu CPF..." />
+                <input 
+                    placeholder="Digite seu CPF..."
+                    value={buyerCPF}
+                    onChange={(e) => setBuyerCPF(e.target.value)}
+                />
 
                 <button>Reservar Assento(s)</button>
             </FormContainer>

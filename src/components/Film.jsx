@@ -1,11 +1,18 @@
 import styled from "styled-components";
 
-export default function Film({film}) {
-    const {posterURL} = film;
+export default function Film({film, setFilmName}) {
+    const {posterURL, title} = film;
     
+    function selectFilm(){
+        setFilmName(title);
+    }
+
     return (
         <MovieContainer>
-            <img src={posterURL} alt="poster"/>
+            <img 
+                onClick={selectFilm}
+                src={posterURL} 
+                alt="poster"/>
         </MovieContainer>
     );
 }

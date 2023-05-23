@@ -3,16 +3,42 @@ import HomePage from "./pages/HomePage/HomePage"
 import SessionsPage from "./pages/SessionsPage/SessionsPage"
 import SeatsPage from "./pages/SeatsPage/SeatsPage"
 import SuccessPage from "./pages/SuccessPage/SuccessPage"
+import { useState } from "react"
 
 export default function App() {
+    const [filmName, setFilmName] = useState('');
+    const [filmDay, setFilmDay] = useState('');
+    const [filmTime, setFilmTime] = useState('');
+    const [tickets, setTickets] = useState([]);
+    const [buyerName, setBuyerName] = useState('');
+    const [buyerCPF, setBuyerCPF] = useState('');
+
+    const seatInfos = {
+        tickets: tickets, 
+        setTickets: setTickets,
+        buyerName: buyerName,
+        setBuyerName: setBuyerName, 
+        buyerCPF: buyerCPF,
+        setBuyerCPF: setBuyerCPF
+    }
+    const sucessInfos = {
+        filmName: filmName, 
+        filmDay: filmDay, 
+        filmTime: filmTime, 
+        tickets: tickets, 
+        buyerName: buyerName, 
+        buyerCPF: buyerCPF
+    }
+
+
     return (
         <>
             <NavContainer>CINEFLEX</NavContainer>
 
-            {/* <HomePage /> */}
-            {/* <SessionsPage /> */}
-            {/* <SeatsPage /> */}
-            <SuccessPage />
+            <HomePage setFilmName={setFilmName}/>
+            {/* <SessionsPage setFilmDay={setFilmDay} setFilmTime={setFilmTime}/> */}
+            {/* <SeatsPage seatInfos={seatInfos}/> */}
+            {/* <SuccessPage sucessInfos={sucessInfos}/> */}
         </>
     )
 }

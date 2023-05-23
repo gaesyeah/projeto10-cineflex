@@ -1,14 +1,27 @@
 import styled from "styled-components";
 
-export default function Session({day}) {
+export default function Session({day, setFilmDay, setFilmTime}) {
     const {weekday, date, showtimes} = day;
+
+    function selectDate(position){
+        if (position === 0){
+            setFilmTime(showtimes[0].name);
+        } else {
+            setFilmTime(showtimes[1].name);
+        }
+        setFilmDay(date);
+    }
 
     return (
         <SessionContainer>
             {weekday} - {date}
             <ButtonsContainer>
-                <button>{showtimes[0].name}</button>
-                <button>{showtimes[1].name}</button>
+                <button onClick={() => selectDate(0)}>
+                    {showtimes[0].name}
+                </button>
+                <button onClick={() => selectDate(1)}>
+                    {showtimes[1].name}
+                </button>
             </ButtonsContainer>
         </SessionContainer>
     );

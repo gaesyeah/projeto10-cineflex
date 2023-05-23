@@ -2,14 +2,21 @@ import styled from "styled-components"
 import { SESSIONLIST } from "../../mock"
 import Session from "../../components/Session"
 
-export default function SessionsPage() {
+export default function SessionsPage({setFilmDay, setFilmTime}) {
     const {days, posterURL, title} = SESSIONLIST;
 
     return (
         <PageContainer>
             Selecione o horário
             <div>
-                {days.map(day => <Session day={day} key={day.id}/>)}
+                {days.map(day => 
+                    <Session 
+                        day={day} 
+                        key={day.id}
+                        setFilmDay={setFilmDay}
+                        setFilmTime={setFilmTime}
+                    />
+                )}
             </div>
 
             <FooterContainer>
