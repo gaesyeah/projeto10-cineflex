@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export default function SuccessPage({sucessInfos}) {
-    const {filmName, filmDay, filmTime, tickets, buyerName, buyerCPF} = sucessInfos;
+    const {tickets, filmName, filmDay, filmTime, buyerName, buyerCPF} = sucessInfos;
 
     return (
         <PageContainer>
@@ -15,13 +15,11 @@ export default function SuccessPage({sucessInfos}) {
 
             <TextContainer>
                 <strong><p>Ingressos</p></strong>
-                <>
-                    {tickets.map(ticketSeat => 
-                        <p key={ticketSeat}>
-                            Assento {ticketSeat.padStart(2, '0')}
-                        </p>
-                    )}
-                </>
+                {tickets.map(ticketSeat => 
+                    <p key={ticketSeat}>
+                        Assento {ticketSeat.padStart(2, '0')}
+                    </p>
+                )}
             </TextContainer>
 
             <TextContainer>
