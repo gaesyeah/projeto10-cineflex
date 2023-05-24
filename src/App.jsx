@@ -32,7 +32,10 @@ export default function App() {
         filmDay: filmDay, 
         filmTime: filmTime, 
         buyerName: buyerName, 
-        buyerCPF: buyerCPF
+        buyerCPF: buyerCPF,
+        setTickets: setTickets,
+        setBuyerName: setBuyerName,
+        setBuyerCPF: setBuyerCPF
     }
 
     return (

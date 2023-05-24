@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 export default function SuccessPage({sucessInfos}) {
-    const {tickets, filmName, filmDay, filmTime, buyerName, buyerCPF} = sucessInfos;
+    const {tickets, filmName, filmDay, filmTime, buyerName, buyerCPF, setTickets, setBuyerName, setBuyerCPF} = sucessInfos;
+
+    function resetOrder(){
+        setTickets([]);
+        setBuyerName('');
+        setBuyerCPF('');
+    }
 
     return (
         <PageContainer>
@@ -30,7 +36,7 @@ export default function SuccessPage({sucessInfos}) {
             </TextContainer>
 
             <Link to='/'>
-                <button>Voltar para Home</button>
+                <button onClick={resetOrder}>Voltar para Home</button>
             </Link>
         </PageContainer>
     )
