@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
 export default function Seat({ seat, tickets, setTickets }) {
-    const { name, isAvailable } = seat;
+    const { id, name, isAvailable } = seat;
 
     function selectSeat() {
         if (!isAvailable) {
             alert('Esse assento não está disponível');
         } else {
-            if (!tickets.includes(name)) {
-                setTickets([...tickets, name]);
+            if (!tickets.includes(id)) {
+                setTickets([...tickets, id]);
             } else {
-                const filteredTickets = tickets.filter(ticket => {
-                    if (ticket === name) {
+                const filteredTickets = tickets.filter(ticketId => {
+                    if (ticketId === id) {
                         return false;
                     } else {
                         return true;
@@ -24,8 +24,8 @@ export default function Seat({ seat, tickets, setTickets }) {
 
     return (
         <SeatItem
+            id={id}
             available={isAvailable}
-            name={name}
             tickets={tickets}
             onClick={selectSeat}
         >{name.padStart(2, '0')}
@@ -44,10 +44,10 @@ const SeatItem = styled.div`
     justify-content: center;
     margin: 5px 3px;
     border-radius: 25px;
-    border: 1px solid ${({ available, name, tickets }) => (
-        (!available) ? '#F7C52B' : ((!tickets.includes(name)) ? '#7B8B99' : '#0E7D71')
+    border: 1px solid ${({id, available, tickets}) => (
+        (!available) ? '#F7C52B' : ((!tickets.includes(id)) ? '#7B8B99' : '#0E7D71')
     )};
-    background-color: ${({ available, name, tickets }) => (
-        (!available) ? '#FBE192' : ((!tickets.includes(name)) ? '#C3CFD9': '#1AAE9E')
+    background-color: ${({id, available, tickets}) => (
+        (!available) ? '#FBE192' : ((!tickets.includes(id)) ? '#C3CFD9': '#1AAE9E')
     )};
 `

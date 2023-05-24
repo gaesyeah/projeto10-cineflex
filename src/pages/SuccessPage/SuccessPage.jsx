@@ -18,7 +18,7 @@ export default function SuccessPage({sucessInfos}) {
                 <strong><p>Ingressos</p></strong>
                 {tickets.map(ticketSeat => 
                     <p key={ticketSeat}>
-                        Assento {ticketSeat.padStart(2, '0')}
+                        Assento {ticketSeat.toString().slice(3)}
                     </p>
                 )}
             </TextContainer>
