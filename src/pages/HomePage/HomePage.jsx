@@ -12,7 +12,7 @@ export default function HomePage({setFilmName}) {
     useEffect(() => {
         axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
         .then((sucess) => setFilmList(sucess.data))
-        .catch((error) => alert.log(error.response.data))
+        .catch((error) => alert(error.response.data))
     }, [])
 
     if (filmList.length === 0){
