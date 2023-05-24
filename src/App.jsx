@@ -28,14 +28,14 @@ export default function App() {
         setBuyerCPF: setBuyerCPF
     }
     const sucessInfos = {
-        tickets: tickets,
         filmNameRef: filmNameRef,
         filmDayRef: filmDayRef, 
         filmTimeRef: filmTimeRef, 
-        buyerName: buyerName, 
-        buyerCPF: buyerCPF,
+        tickets: tickets,
         setTickets: setTickets,
+        buyerName: buyerName,
         setBuyerName: setBuyerName,
+        buyerCPF: buyerCPF,
         setBuyerCPF: setBuyerCPF
     }
 

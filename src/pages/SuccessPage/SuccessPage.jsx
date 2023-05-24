@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { SEATLIST } from "../../mock";
 
 export default function SuccessPage({sucessInfos}) {
-    const {tickets, filmNameRef, filmDayRef, filmTimeRef, buyerName, buyerCPF, setTickets, setBuyerName, setBuyerCPF} = sucessInfos;
+    const {filmNameRef, filmDayRef, filmTimeRef, tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
     const {seats} = SEATLIST;
     const navigate = useNavigate();
 
