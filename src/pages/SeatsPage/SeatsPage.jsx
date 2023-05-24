@@ -5,6 +5,7 @@ import { SEATLIST } from "../../mock";
 import Seat from "../../components/Seat";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { cpf } from "cpf-cnpj-validator";
 
 export default function SeatsPage({ seatInfos }) {
     const { tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
@@ -78,7 +79,7 @@ export default function SeatsPage({ seatInfos }) {
                     />
     
                     <button  
-                        disabled={(!buyerName || !buyerCPF || tickets.length === 0) ? true : false}
+                        disabled={(!buyerName || !cpf.isValid(buyerCPF) || tickets.length === 0) ? true : false}
                         onClick={() => navigate('/sucess')}
                     >Reservar Assento
                     </button>

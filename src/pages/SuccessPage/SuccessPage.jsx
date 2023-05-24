@@ -2,6 +2,7 @@ import styled from "styled-components";
 import sucessLoading from "./../../assets/sucessLoading.gif";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { cpf } from "cpf-cnpj-validator";
 
 export default function SuccessPage({sucessInfos}) {
     const {filmNameRef, filmDayRef, filmTimeRef, tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
@@ -50,7 +51,7 @@ export default function SuccessPage({sucessInfos}) {
             <TextContainer>
                 <strong><p>Comprador</p></strong>
                 <p>Nome: {buyerName}</p>
-                <p>CPF: {buyerCPF}</p>
+                <p>CPF: {cpf.format(buyerCPF)}</p>
             </TextContainer>
 
                 <button onClick={resetOrder}>
