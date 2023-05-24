@@ -16,6 +16,7 @@ export default function Session({day, setFilmDay, setFilmTime}) {
         navigate('/seats');
     }
 
+    
     return (
         <SessionContainer>
             {weekday} - {date}
