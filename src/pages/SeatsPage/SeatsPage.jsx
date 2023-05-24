@@ -4,14 +4,20 @@ import loadingGif from "./../../assets/loading.gif";
 import { SEATLIST } from "../../mock";
 import Seat from "../../components/Seat";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SeatsPage({ seatInfos }) {
     const { tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
     const navigate = useNavigate();
 
     const [seatList, setSeatList] = useState({});
-    const { seats, movie, day, name } = SEATLIST;
+    const { seats, movie, day, name } = seatList;
+
+    useEffect(() => {
+        setInterval(()=> {
+            setSeatList({...SEATLIST});
+        },500)
+    },[])
 
     if (!seats){
         return (

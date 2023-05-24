@@ -3,12 +3,18 @@ import Loading from "../../style/Loading";
 import loadingGif from "./../../assets/loading.gif";
 import { SESSIONLIST } from "../../mock";
 import Session from "../../components/Session";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SessionsPage({filmDayRef, filmTimeRef}) {
 
     const [sessionList, setSessionList] = useState({});
-    const {days, posterURL, title} = SESSIONLIST;
+    const {days, posterURL, title} = sessionList;
+
+    useEffect(() => {
+        setInterval(() => {
+            setSessionList({...SESSIONLIST});
+        },500)
+    },[])
 
     if (!days){
         return (
