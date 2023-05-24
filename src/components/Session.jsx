@@ -5,13 +5,9 @@ export default function Session({day, filmDayRef, filmTimeRef}) {
     const {weekday, date, showtimes} = day;
     const navigate = useNavigate();
 
-    function selectDate(position){
+    function selectDate(index){
         filmDayRef.current = date;
-        if (position === 0){
-            filmTimeRef.current = showtimes[0].name;
-        } else {
-            filmTimeRef.current = showtimes[1].name;
-        }
+        filmTimeRef.current = showtimes[index].name;
 
         navigate('/seats');
     }
