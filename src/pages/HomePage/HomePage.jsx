@@ -37,7 +37,7 @@ export default function HomePage({filmNameRef}) {
                 </ListContainer>
     
             </PageContainer>
-        )
+        );
     }
 }
 

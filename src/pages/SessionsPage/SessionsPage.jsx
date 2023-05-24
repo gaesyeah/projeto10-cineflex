@@ -1,35 +1,48 @@
-import styled from "styled-components"
-import { SESSIONLIST } from "../../mock"
-import Session from "../../components/Session"
+import styled from "styled-components";
+import Loading from "../../style/Loading";
+import loadingGif from "./../../assets/loading.gif";
+import { SESSIONLIST } from "../../mock";
+import Session from "../../components/Session";
+import { useState } from "react";
 
 export default function SessionsPage({filmDayRef, filmTimeRef}) {
+
+    const [sessionList, setSessionList] = useState({});
     const {days, posterURL, title} = SESSIONLIST;
 
-    return (
-        <PageContainer>
-            Selecione o horário
-            <div>
-                {days.map(day => 
-                    <Session 
-                        day={day} 
-                        key={day.id}
-                        filmDayRef={filmDayRef}
-                        filmTimeRef={filmTimeRef}
-                    />
-                )}
-            </div>
-
-            <FooterContainer>
+    if (!days){
+        return (
+            <Loading>
+                <img src={loadingGif}/>
+            </Loading>
+        );
+    }else{
+        return (
+            <PageContainer>
+                Selecione o horário
                 <div>
-                    <img src={posterURL} alt="poster" />
+                    {days.map(day => 
+                        <Session 
+                            day={day} 
+                            key={day.id}
+                            filmDayRef={filmDayRef}
+                            filmTimeRef={filmTimeRef}
+                        />
+                    )}
                 </div>
-                <div>
-                    <p>{title}</p>
-                </div>
-            </FooterContainer>
-
-        </PageContainer>
-    )
+    
+                <FooterContainer>
+                    <div>
+                        <img src={posterURL} alt="poster" />
+                    </div>
+                    <div>
+                        <p>{title}</p>
+                    </div>
+                </FooterContainer>
+    
+            </PageContainer>
+        );
+    }
 }
 
 const PageContainer = styled.div`

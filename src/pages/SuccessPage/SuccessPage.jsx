@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { SEATLIST } from "../../mock";
+import { useNavigate } from "react-router-dom";
 
 export default function SuccessPage({sucessInfos}) {
     const {filmNameRef, filmDayRef, filmTimeRef, tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
-    const {seats} = SEATLIST;
     const navigate = useNavigate();
 
     function resetOrder(){
@@ -27,15 +25,11 @@ export default function SuccessPage({sucessInfos}) {
 
             <TextContainer>
                 <strong><p>Ingressos</p></strong>
-                {seats.map(({id, name}) => {
-                    if (tickets.includes(id)){
-                        return (
-                            <p key={id}>
-                                Assento {name.padStart(2, '0')}
-                            </p>
-                        )
-                    }
-                })}
+                {tickets.map(id => 
+                    <p key={id}>
+                        Assento {id.toString().slice(3)}
+                    </p>
+                )}
             </TextContainer>
 
             <TextContainer>
@@ -48,7 +42,7 @@ export default function SuccessPage({sucessInfos}) {
                     Voltar para Home
                 </button>
         </PageContainer>
-    )
+    );
 }
 
 const PageContainer = styled.div`

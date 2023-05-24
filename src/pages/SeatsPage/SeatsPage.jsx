@@ -1,83 +1,96 @@
-import styled from "styled-components"
-import { SEATLIST } from "../../mock"
-import Seat from "../../components/Seat"
+import styled from "styled-components";
+import Loading from "../../style/Loading";
+import loadingGif from "./../../assets/loading.gif";
+import { SEATLIST } from "../../mock";
+import Seat from "../../components/Seat";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function SeatsPage({ seatInfos }) {
     const { tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
-    const { seats, movie, day, name } = SEATLIST;
     const navigate = useNavigate();
 
-    return (
-        <PageContainer>
-            Selecione o(s) assento(s)
+    const [seatList, setSeatList] = useState({});
+    const { seats, movie, day, name } = SEATLIST;
 
-            <SeatsContainer>
-                {seats.map(seat =>
-                    <Seat
-                        seat={seat}
-                        key={seat.id}
-                        tickets={tickets}
-                        setTickets={setTickets}
+    if (!seats){
+        return (
+            <Loading>
+                <img src={loadingGif}/>
+            </Loading>
+        );
+    } else {
+        return (
+            <PageContainer>
+                Selecione o(s) assento(s)
+    
+                <SeatsContainer>
+                    {seats.map(seat =>
+                        <Seat
+                            seat={seat}
+                            key={seat.id}
+                            tickets={tickets}
+                            setTickets={setTickets}
+                        />
+                    )}
+                </SeatsContainer>
+    
+                <CaptionContainer>
+                    <CaptionItem>
+                        <CaptionCircle
+                            background={'#1AAE9E'}
+                            border={'#0E7D71'}
+                        />Selecionado
+                    </CaptionItem>
+                    <CaptionItem>
+                        <CaptionCircle
+                            background={'#C3CFD9'}
+                            border={'#7B8B99'}
+                        />Disponível
+                    </CaptionItem>
+                    <CaptionItem>
+                        <CaptionCircle
+                            background={'#FBE192'}
+                            border={'#F7C52B'}
+                        />Indisponível
+                    </CaptionItem>
+                </CaptionContainer>
+    
+                <FormContainer>
+                    Nome do Comprador:
+                    <input
+                        placeholder="Digite seu nome..."
+                        value={buyerName}
+                        onChange={(e) => setBuyerName(e.target.value)}
                     />
-                )}
-            </SeatsContainer>
-
-            <CaptionContainer>
-                <CaptionItem>
-                    <CaptionCircle
-                        background={'#1AAE9E'}
-                        border={'#0E7D71'}
-                    />Selecionado
-                </CaptionItem>
-                <CaptionItem>
-                    <CaptionCircle
-                        background={'#C3CFD9'}
-                        border={'#7B8B99'}
-                    />Disponível
-                </CaptionItem>
-                <CaptionItem>
-                    <CaptionCircle
-                        background={'#FBE192'}
-                        border={'#F7C52B'}
-                    />Indisponível
-                </CaptionItem>
-            </CaptionContainer>
-
-            <FormContainer>
-                Nome do Comprador:
-                <input
-                    placeholder="Digite seu nome..."
-                    value={buyerName}
-                    onChange={(e) => setBuyerName(e.target.value)}
-                />
-
-                CPF do Comprador:
-                <input
-                    placeholder="Digite seu CPF..."
-                    value={buyerCPF}
-                    onChange={(e) => setBuyerCPF(e.target.value)}
-                />
-
-                <button  
-                    disabled={(!buyerName || !buyerCPF || tickets.length === 0) ? true : false}
-                    onClick={() => navigate('/sucess')}
-                >Reservar Assento
-                </button>
-            </FormContainer>
-
-            <FooterContainer>
-                <div>
-                    <img src={movie.posterURL} alt="poster" />
-                </div>
-                <div>
-                    <p>{movie.title}</p>
-                    <p>{day.weekday} - {name}</p>
-                </div>
-            </FooterContainer>
-
-        </PageContainer>
-    )
+    
+                    CPF do Comprador:
+                    <input
+                        placeholder="Digite seu CPF..."
+                        value={buyerCPF}
+                        onChange={(e) => setBuyerCPF(e.target.value)}
+                    />
+    
+                    <button  
+                        disabled={(!buyerName || !buyerCPF || tickets.length === 0) ? true : false}
+                        onClick={() => navigate('/sucess')}
+                    >Reservar Assento
+                    </button>
+                </FormContainer>
+    
+                <FooterContainer>
+                    <div>
+                        <img src={movie.posterURL} alt="poster" />
+                    </div>
+                    <div>
+                        <p>{movie.title}</p>
+                        <p>{day.weekday} - {name}</p>
+                    </div>
+                </FooterContainer>
+    
+            </PageContainer>
+        );
+    }
 }
 
 const PageContainer = styled.div`
