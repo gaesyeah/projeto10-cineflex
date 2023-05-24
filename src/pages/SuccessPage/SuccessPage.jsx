@@ -8,11 +8,11 @@ export default function SuccessPage({sucessInfos}) {
     const {filmNameRef, filmDayRef, filmTimeRef, tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
     const navigate = useNavigate();
 
-    const [hide, setHide] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setTimeout(() => {
-            setHide(true);
+            setLoading(false);
         }, 500);
     }, []);
 
@@ -26,7 +26,7 @@ export default function SuccessPage({sucessInfos}) {
 
     return (
         <PageContainer>
-            {!hide &&
+            {loading &&
                 <SucessLoading>
                     <img src={sucessLoading}/>
                 </SucessLoading>
@@ -54,7 +54,7 @@ export default function SuccessPage({sucessInfos}) {
                 <p>CPF: {cpf.format(buyerCPF)}</p>
             </TextContainer>
 
-                <button onClick={resetOrder}>
+                <button disabled={loading} onClick={resetOrder}>
                     Voltar para Home
                 </button>
         </PageContainer>
