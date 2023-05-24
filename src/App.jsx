@@ -5,6 +5,7 @@ import SeatsPage from "./pages/SeatsPage/SeatsPage"
 import SuccessPage from "./pages/SuccessPage/SuccessPage"
 import { useState } from "react"
 import axios from "axios"
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 
 export default function App() {
 
@@ -36,14 +37,18 @@ export default function App() {
 
 
     return (
-        <>
+        <BrowserRouter>
+
             <NavContainer>CINEFLEX</NavContainer>
 
-            <HomePage setFilmName={setFilmName}/>
-            {/* <SessionsPage setFilmDay={setFilmDay} setFilmTime={setFilmTime}/> */}
-            {/* <SeatsPage seatInfos={seatInfos}/> */}
-            {/* <SuccessPage sucessInfos={sucessInfos}/> */}
-        </>
+            <Routes>
+                <Route path='/' element={<HomePage setFilmName={setFilmName}/>}/>
+                
+                {/* <SessionsPage setFilmDay={setFilmDay} setFilmTime={setFilmTime}/> */}
+                {/* <SeatsPage seatInfos={seatInfos}/> */}
+                {/* <SuccessPage sucessInfos={sucessInfos}/> */}
+            </Routes>
+        </BrowserRouter>
     )
 }
 

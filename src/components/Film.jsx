@@ -5,6 +5,7 @@ export default function Film({film, setFilmName}) {
     
     function selectFilm(){
         setFilmName(title);
+        console.log(title);
     }
 
     return (
