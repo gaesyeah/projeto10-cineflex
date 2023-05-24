@@ -16,8 +16,8 @@ export default function SeatsPage({ seatInfos }) {
     useEffect(() => {
         setInterval(()=> {
             setSeatList({...SEATLIST});
-        },500)
-    },[])
+        }, 500);
+    }, [])
 
     if (!seats){
         return (

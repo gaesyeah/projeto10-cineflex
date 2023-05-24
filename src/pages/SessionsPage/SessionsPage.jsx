@@ -13,8 +13,8 @@ export default function SessionsPage({filmDayRef, filmTimeRef}) {
     useEffect(() => {
         setInterval(() => {
             setSessionList({...SESSIONLIST});
-        },500)
-    },[])
+        }, 500);
+    }, [])
 
     if (!days){
         return (
