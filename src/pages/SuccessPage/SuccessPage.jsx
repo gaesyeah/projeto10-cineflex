@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 export default function SuccessPage({sucessInfos}) {
@@ -28,7 +29,9 @@ export default function SuccessPage({sucessInfos}) {
                 <p>CPF: {buyerCPF}</p>
             </TextContainer>
 
-            <button>Voltar para Home</button>
+            <Link to='/'>
+                <button>Voltar para Home</button>
+            </Link>
         </PageContainer>
     )
 }

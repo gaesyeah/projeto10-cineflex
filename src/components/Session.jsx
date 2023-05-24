@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Session({day, setFilmDay, setFilmTime}) {
@@ -16,12 +17,16 @@ export default function Session({day, setFilmDay, setFilmTime}) {
         <SessionContainer>
             {weekday} - {date}
             <ButtonsContainer>
-                <button onClick={() => selectDate(0)}>
-                    {showtimes[0].name}
-                </button>
-                <button onClick={() => selectDate(1)}>
-                    {showtimes[1].name}
-                </button>
+                <Link to='/seats'>
+                    <button onClick={() => selectDate(0)}>
+                        {showtimes[0].name}
+                    </button>
+                </Link>
+                <Link to='/seats'>
+                    <button onClick={() => selectDate(1)}>
+                        {showtimes[1].name}
+                    </button>
+                </Link>
             </ButtonsContainer>
         </SessionContainer>
     );

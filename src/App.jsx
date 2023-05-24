@@ -35,7 +35,6 @@ export default function App() {
         buyerCPF: buyerCPF
     }
 
-
     return (
         <BrowserRouter>
 
@@ -43,10 +42,9 @@ export default function App() {
 
             <Routes>
                 <Route path='/' element={<HomePage setFilmName={setFilmName}/>}/>
-                
-                {/* <SessionsPage setFilmDay={setFilmDay} setFilmTime={setFilmTime}/> */}
-                {/* <SeatsPage seatInfos={seatInfos}/> */}
-                {/* <SuccessPage sucessInfos={sucessInfos}/> */}
+                <Route path='/sessions' element={<SessionsPage setFilmDay={setFilmDay} setFilmTime={setFilmTime}/>}/> 
+                <Route path='/seats' element={<SeatsPage seatInfos={seatInfos}/>}/>
+                <Route path='/sucess' element={<SuccessPage sucessInfos={sucessInfos}/>}/>
             </Routes>
         </BrowserRouter>
     )

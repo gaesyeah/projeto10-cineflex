@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { SEATLIST } from "../../mock"
 import Seat from "../../components/Seat"
+import { Link } from "react-router-dom";
 
 export default function SeatsPage({seatInfos}) {
     const {tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = seatInfos;
@@ -57,7 +58,9 @@ export default function SeatsPage({seatInfos}) {
                     onChange={(e) => setBuyerCPF(e.target.value)}
                 />
 
-                <button>Reservar Assento(s)</button>
+                <Link to='/sucess'>
+                    <button>Reservar Assento</button>
+                </Link>
             </FormContainer>
 
             <FooterContainer>

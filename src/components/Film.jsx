@@ -1,19 +1,22 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Film({film, setFilmName}) {
     const {posterURL, title} = film;
-    
+
     function selectFilm(){
         setFilmName(title);
-        console.log(title);
     }
 
     return (
         <MovieContainer>
-            <img 
-                onClick={selectFilm}
-                src={posterURL} 
-                alt="poster"/>
+            <Link to='/sessions'>
+                <img 
+                    onClick={selectFilm}
+                    src={posterURL} 
+                    alt="poster"
+                />
+            </Link>
         </MovieContainer>
     );
 }
