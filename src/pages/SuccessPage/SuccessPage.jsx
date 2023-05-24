@@ -7,11 +7,11 @@ export default function SuccessPage({sucessInfos}) {
     const {filmNameRef, filmDayRef, filmTimeRef, tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
     const navigate = useNavigate();
 
-    const [hide, setHide] = useState(true);
+    const [hide, setHide] = useState(false);
 
     useEffect(() => {
         setTimeout(() => {
-            setHide(false);
+            setHide(true);
         }, 500);
     }, []);
 
@@ -25,7 +25,7 @@ export default function SuccessPage({sucessInfos}) {
 
     return (
         <PageContainer>
-            {hide &&
+            {!hide &&
                 <SucessLoading>
                     <img src={sucessLoading}/>
                 </SucessLoading>
@@ -61,15 +61,15 @@ export default function SuccessPage({sucessInfos}) {
 }
 
 const SucessLoading = styled.div`
+    margin-top: -100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -20%;
     width: 100%;
     height: 100%;
     position: absolute;
     img{
-        width: 130px;
+        width: 115px;
     }
 `
 const PageContainer = styled.div`

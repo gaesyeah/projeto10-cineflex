@@ -14,7 +14,7 @@ export default function SeatsPage({ seatInfos }) {
     const { seats, movie, day, name } = seatList;
 
     useEffect(() => {
-        setTimeout(()=> {
+        setTimeout(() => {
             setSeatList({...SEATLIST});
         }, 500);
     }, [])
