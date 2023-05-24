@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
 		cursor: pointer;
 		&:disabled {
 			background-color: lightgray;
+			cursor: not-allowed;
 		}
 	}
 	input {
