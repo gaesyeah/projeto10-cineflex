@@ -7,8 +7,7 @@ import { useState, useEffect } from "react";
 
 export default function SessionsPage({filmDayRef, filmTimeRef}) {
 
-    const [sessionList, setSessionList] = useState({});
-    const {days, posterURL, title} = sessionList;
+    const [sessionList, setSessionList] = useState(null);
 
     useEffect(() => {
         setTimeout(() => {
@@ -16,13 +15,15 @@ export default function SessionsPage({filmDayRef, filmTimeRef}) {
         }, 500);
     }, []);
 
-    if (!days){
+    if (sessionList === null){
         return (
             <Loading>
                 <img src={loadingGif}/>
             </Loading>
         );
     }else{
+        const {days, posterURL, title} = sessionList;
+
         return (
             <PageContainer>
                 Selecione o horário

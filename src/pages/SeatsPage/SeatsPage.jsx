@@ -11,8 +11,7 @@ export default function SeatsPage({ seatInfos }) {
     const { tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
     const navigate = useNavigate();
 
-    const [seatList, setSeatList] = useState({});
-    const { seats, movie, day, name } = seatList;
+    const [seatList, setSeatList] = useState(null);
 
     useEffect(() => {
         setTimeout(() => {
@@ -20,13 +19,15 @@ export default function SeatsPage({ seatInfos }) {
         }, 500);
     }, [])
 
-    if (!seats){
+    if (seatList === null){
         return (
             <Loading>
                 <img src={loadingGif}/>
             </Loading>
         );
     } else {
+        const { seats, movie, day, name } = seatList;
+        
         return (
             <PageContainer>
                 Selecione o(s) assento(s)

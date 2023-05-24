@@ -7,15 +7,15 @@ import axios from "axios";
 
 export default function HomePage({filmNameRef}) {
 
-    const [filmList, setFilmList] = useState([]);
+    const [filmList, setFilmList] = useState(null);
 
     useEffect(() => {
         axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
         .then((sucess) => setFilmList(sucess.data))
         .catch((error) => alert(error.response.data))
-    }, [])
+    }, []);
 
-    if (filmList.length === 0){
+    if (filmList === null){
         return (
             <Loading>
                 <img src={loadingGif}/>
