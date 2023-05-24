@@ -5,7 +5,7 @@ import loadingGif from "../../assets/loading.gif";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function HomePage({setFilmName}) {
+export default function HomePage({filmNameRef}) {
 
     const [filmList, setFilmList] = useState([]);
 
@@ -31,7 +31,7 @@ export default function HomePage({setFilmName}) {
                         <Film 
                             film={film} 
                             key={film.id} 
-                            setFilmName={setFilmName}
+                            filmNameRef={filmNameRef}
                         />
                     )}
                 </ListContainer>

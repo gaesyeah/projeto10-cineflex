@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { SESSIONLIST } from "../../mock"
 import Session from "../../components/Session"
 
-export default function SessionsPage({setFilmDay, setFilmTime}) {
+export default function SessionsPage({filmDayRef, filmTimeRef}) {
     const {days, posterURL, title} = SESSIONLIST;
 
     return (
@@ -13,8 +13,8 @@ export default function SessionsPage({setFilmDay, setFilmTime}) {
                     <Session 
                         day={day} 
                         key={day.id}
-                        setFilmDay={setFilmDay}
-                        setFilmTime={setFilmTime}
+                        filmDayRef={filmDayRef}
+                        filmTimeRef={filmTimeRef}
                     />
                 )}
             </div>

@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Session({day, setFilmDay, setFilmTime}) {
+export default function Session({day, filmDayRef, filmTimeRef}) {
     const {weekday, date, showtimes} = day;
     const navigate = useNavigate();
 
     function selectDate(position){
-        setFilmDay(date);
+        filmDayRef.current = date;
         if (position === 0){
-            setFilmTime(showtimes[0].name);
+            filmTimeRef.current = showtimes[0].name;
         } else {
-            setFilmTime(showtimes[1].name);
+            filmTimeRef.current = showtimes[1].name;
         }
 
         navigate('/seats');

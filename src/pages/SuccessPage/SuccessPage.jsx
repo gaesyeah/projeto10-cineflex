@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { SEATLIST } from "../../mock";
 
 export default function SuccessPage({sucessInfos}) {
-    const {tickets, filmName, filmDay, filmTime, buyerName, buyerCPF, setTickets, setBuyerName, setBuyerCPF} = sucessInfos;
+    const {tickets, filmNameRef, filmDayRef, filmTimeRef, buyerName, buyerCPF, setTickets, setBuyerName, setBuyerCPF} = sucessInfos;
     const {seats} = SEATLIST;
     const navigate = useNavigate();
 
@@ -21,8 +21,8 @@ export default function SuccessPage({sucessInfos}) {
 
             <TextContainer>
                 <strong><p>Filme e sessão</p></strong>
-                <p>{filmName}</p>
-                <p>{filmDay} {filmTime}</p>
+                <p>{filmNameRef.current}</p>
+                <p>{filmDayRef.current} {filmTimeRef.current}</p>
             </TextContainer>
 
             <TextContainer>

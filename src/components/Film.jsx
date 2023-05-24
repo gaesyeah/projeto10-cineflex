@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Film({film, setFilmName}) {
+export default function Film({film, filmNameRef}) {
     const {posterURL, title} = film;
     const navigate = useNavigate();
 
     function selectFilm(){
-        setFilmName(title);
+        filmNameRef.current = title;
+        
         navigate('/sessions');
     }
 
