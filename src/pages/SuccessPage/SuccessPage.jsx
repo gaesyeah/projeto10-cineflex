@@ -1,9 +1,20 @@
 import styled from "styled-components";
+import sucessLoading from "./../../assets/sucessLoading.gif";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function SuccessPage({sucessInfos}) {
     const {filmNameRef, filmDayRef, filmTimeRef, tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
     const navigate = useNavigate();
+
+    const [hide, setHide] = useState(true);
+
+    useEffect(() => {
+        setInterval(() => {
+            setHide(false);
+        }, 500);
+    }, []);
 
     function resetOrder(){
         setTickets([]);
@@ -15,6 +26,11 @@ export default function SuccessPage({sucessInfos}) {
 
     return (
         <PageContainer>
+            {hide &&
+                <SucessLoading>
+                    <img src={sucessLoading}/>
+                </SucessLoading>
+            }
             <h1>Pedido feito <br /> com sucesso!</h1>
 
             <TextContainer>
@@ -45,6 +61,18 @@ export default function SuccessPage({sucessInfos}) {
     );
 }
 
+const SucessLoading = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    img{
+        width: 130px;
+    }
+`
 const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
