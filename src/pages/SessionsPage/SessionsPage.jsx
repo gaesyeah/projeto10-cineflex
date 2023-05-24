@@ -11,10 +11,10 @@ export default function SessionsPage({filmDayRef, filmTimeRef}) {
     const {days, posterURL, title} = sessionList;
 
     useEffect(() => {
-        setInterval(() => {
+        setTimeout(() => {
             setSessionList({...SESSIONLIST});
         }, 500);
-    }, [])
+    }, []);
 
     if (!days){
         return (

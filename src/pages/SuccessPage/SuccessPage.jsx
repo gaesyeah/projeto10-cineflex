@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import sucessLoading from "./../../assets/sucessLoading.gif";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SuccessPage({sucessInfos}) {
     const {filmNameRef, filmDayRef, filmTimeRef, tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
@@ -11,7 +10,7 @@ export default function SuccessPage({sucessInfos}) {
     const [hide, setHide] = useState(true);
 
     useEffect(() => {
-        setInterval(() => {
+        setTimeout(() => {
             setHide(false);
         }, 500);
     }, []);
