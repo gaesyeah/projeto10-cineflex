@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Session({day, setFilmDay, setFilmTime}) {
     const {weekday, date, showtimes} = day;
+    const navigate = useNavigate();
 
     function selectDate(position){
+        setFilmDay(date);
         if (position === 0){
             setFilmTime(showtimes[0].name);
         } else {
             setFilmTime(showtimes[1].name);
         }
-        setFilmDay(date);
+
+        navigate('/seats');
     }
 
     return (
@@ -18,14 +21,10 @@ export default function Session({day, setFilmDay, setFilmTime}) {
             {weekday} - {date}
             <ButtonsContainer>
                 <button onClick={() => selectDate(0)}>
-                    <Link to='/seats'>
-                        {showtimes[0].name}
-                    </Link>
+                    {showtimes[0].name}
                 </button>
                 <button onClick={() => selectDate(1)}>
-                    <Link to='/seats'>
-                        {showtimes[1].name}
-                    </Link>
+                    {showtimes[1].name}
                 </button>
             </ButtonsContainer>
         </SessionContainer>

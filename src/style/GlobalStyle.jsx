@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
 		border-style: none;
 		font-family: 'Roboto';
 		font-size: 18px;
+		color: #FFFFFF;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -34,10 +35,6 @@ const GlobalStyle = createGlobalStyle`
 		&::placeholder{
 			font-style: italic;
 		}
-	}
-	a {
-		color: #FFFFFF;
-		text-decoration-line: none;
 	}
 `
 

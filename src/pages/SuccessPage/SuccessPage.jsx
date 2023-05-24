@@ -1,15 +1,18 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { SEATLIST } from "../../mock";
 
 export default function SuccessPage({sucessInfos}) {
     const {tickets, filmName, filmDay, filmTime, buyerName, buyerCPF, setTickets, setBuyerName, setBuyerCPF} = sucessInfos;
     const {seats} = SEATLIST;
+    const navigate = useNavigate();
 
     function resetOrder(){
         setTickets([]);
         setBuyerName('');
         setBuyerCPF('');
+        
+        navigate('/');
     }
 
     return (
@@ -42,9 +45,7 @@ export default function SuccessPage({sucessInfos}) {
             </TextContainer>
 
                 <button onClick={resetOrder}>
-                    <Link to='/'>
-                        Voltar para Home
-                    </Link>
+                    Voltar para Home
                 </button>
         </PageContainer>
     )

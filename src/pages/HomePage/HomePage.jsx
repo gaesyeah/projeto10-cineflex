@@ -1,7 +1,7 @@
-import Film from "../../components/Film.jsx"
-import styled from "styled-components"
+import Film from "../../components/Film.jsx";
+import styled from "styled-components";
 import Loading from "../../style/Loading.jsx";
-import loadingGif from "../../../public/loading.gif"
+import loadingGif from "../../assets/loading.gif";
 import { useEffect, useState } from "react";
 import axios from "axios";
 

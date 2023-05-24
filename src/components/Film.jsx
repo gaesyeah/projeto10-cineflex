@@ -1,22 +1,22 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Film({film, setFilmName}) {
     const {posterURL, title} = film;
+    const navigate = useNavigate();
 
     function selectFilm(){
         setFilmName(title);
+        navigate('/sessions');
     }
 
     return (
         <MovieContainer>
-            <Link to='/sessions'>
-                <img 
-                    onClick={selectFilm}
-                    src={posterURL} 
-                    alt="poster"
-                />
-            </Link>
+            <img 
+                onClick={selectFilm}
+                src={posterURL} 
+                alt="poster"
+            />
         </MovieContainer>
     );
 }

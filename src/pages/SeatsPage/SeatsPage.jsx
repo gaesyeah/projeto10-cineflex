@@ -1,15 +1,12 @@
 import styled from "styled-components"
 import { SEATLIST } from "../../mock"
 import Seat from "../../components/Seat"
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function SeatsPage({ seatInfos }) {
     const { tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
     const { seats, movie, day, name } = SEATLIST;
-
-    function disableButton(){
-        return (!buyerName || !buyerCPF || tickets.length === 0);
-    }
+    const navigate = useNavigate();
 
     return (
         <PageContainer>
@@ -62,16 +59,10 @@ export default function SeatsPage({ seatInfos }) {
                     onChange={(e) => setBuyerCPF(e.target.value)}
                 />
 
-                <button disabled={(disableButton()) ? true : false}>
-                    {(disableButton())
-                        ? 
-                        'Reservar Assento'
-                        : 
-                        <Link to='/sucess'>
-                            Reservar Assento
-                        </Link>
-                    }
-
+                <button  
+                    disabled={(!buyerName || !buyerCPF || tickets.length === 0) ? true : false}
+                    onClick={() => navigate('/sucess')}
+                >Reservar Assento
                 </button>
             </FormContainer>
 
