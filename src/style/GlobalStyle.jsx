@@ -12,7 +12,6 @@ const GlobalStyle = createGlobalStyle`
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		color: #FFFFFF;
 		padding: 0 20px;
 		cursor: pointer;
 		&:disabled {
@@ -34,7 +33,10 @@ const GlobalStyle = createGlobalStyle`
 		&::placeholder{
 			font-style: italic;
 		}
-		
+	}
+	a {
+		color: #FFFFFF;
+		text-decoration-line: none;
 	}
 `
 

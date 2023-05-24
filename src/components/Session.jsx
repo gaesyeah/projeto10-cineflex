@@ -17,16 +17,16 @@ export default function Session({day, setFilmDay, setFilmTime}) {
         <SessionContainer>
             {weekday} - {date}
             <ButtonsContainer>
-                <Link to='/seats'>
-                    <button onClick={() => selectDate(0)}>
+                <button onClick={() => selectDate(0)}>
+                    <Link to='/seats'>
                         {showtimes[0].name}
-                    </button>
-                </Link>
-                <Link to='/seats'>
-                    <button onClick={() => selectDate(1)}>
+                    </Link>
+                </button>
+                <button onClick={() => selectDate(1)}>
+                    <Link to='/seats'>
                         {showtimes[1].name}
-                    </button>
-                </Link>
+                    </Link>
+                </button>
             </ButtonsContainer>
         </SessionContainer>
     );

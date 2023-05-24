@@ -35,9 +35,11 @@ export default function SuccessPage({sucessInfos}) {
                 <p>CPF: {buyerCPF}</p>
             </TextContainer>
 
-            <Link to='/'>
-                <button onClick={resetOrder}>Voltar para Home</button>
-            </Link>
+                <button onClick={resetOrder}>
+                    <Link to='/'>
+                        Voltar para Home
+                    </Link>
+                </button>
         </PageContainer>
     )
 }

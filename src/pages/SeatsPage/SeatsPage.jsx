@@ -3,64 +3,76 @@ import { SEATLIST } from "../../mock"
 import Seat from "../../components/Seat"
 import { Link } from "react-router-dom";
 
-export default function SeatsPage({seatInfos}) {
-    const {tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = seatInfos;
-    const {seats, movie, day, name} = SEATLIST;
+export default function SeatsPage({ seatInfos }) {
+    const { tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
+    const { seats, movie, day, name } = SEATLIST;
+
+    function disableButton(){
+        return (!buyerName || !buyerCPF || tickets.length === 0);
+    }
 
     return (
         <PageContainer>
             Selecione o(s) assento(s)
 
             <SeatsContainer>
-                {seats.map(seat => 
-                    <Seat 
-                        seat={seat} 
+                {seats.map(seat =>
+                    <Seat
+                        seat={seat}
                         key={seat.id}
-                        tickets={tickets} 
-                        setTickets={setTickets} 
+                        tickets={tickets}
+                        setTickets={setTickets}
                     />
                 )}
             </SeatsContainer>
 
             <CaptionContainer>
                 <CaptionItem>
-                    <CaptionCircle 
-                        background={'#1AAE9E'} 
-                        border={'#0E7D71'} 
+                    <CaptionCircle
+                        background={'#1AAE9E'}
+                        border={'#0E7D71'}
                     />Selecionado
                 </CaptionItem>
                 <CaptionItem>
-                    <CaptionCircle 
-                        background={'#C3CFD9'} 
-                        border={'#7B8B99'} 
+                    <CaptionCircle
+                        background={'#C3CFD9'}
+                        border={'#7B8B99'}
                     />Disponível
                 </CaptionItem>
                 <CaptionItem>
-                    <CaptionCircle 
-                        background={'#FBE192'} 
-                        border={'#F7C52B'} 
+                    <CaptionCircle
+                        background={'#FBE192'}
+                        border={'#F7C52B'}
                     />Indisponível
                 </CaptionItem>
             </CaptionContainer>
 
             <FormContainer>
                 Nome do Comprador:
-                <input 
+                <input
                     placeholder="Digite seu nome..."
                     value={buyerName}
                     onChange={(e) => setBuyerName(e.target.value)}
                 />
 
                 CPF do Comprador:
-                <input 
+                <input
                     placeholder="Digite seu CPF..."
                     value={buyerCPF}
                     onChange={(e) => setBuyerCPF(e.target.value)}
                 />
 
-                <Link to='/sucess'>
-                    <button>Reservar Assento</button>
-                </Link>
+                <button disabled={(disableButton()) ? true : false}>
+                    {(disableButton())
+                        ? 
+                        'Reservar Assento'
+                        : 
+                        <Link to='/sucess'>
+                            Reservar Assento
+                        </Link>
+                    }
+
+                </button>
             </FormContainer>
 
             <FooterContainer>
@@ -120,8 +132,8 @@ const CaptionContainer = styled.div`
     margin: 20px;
 `
 const CaptionCircle = styled.div`
-    border: 1px solid ${({border}) => border};
-    background-color: ${({background}) => background};   
+    border: 1px solid ${({ border }) => border};
+    background-color: ${({ background }) => background};   
     height: 25px;
     width: 25px;
     border-radius: 25px;
