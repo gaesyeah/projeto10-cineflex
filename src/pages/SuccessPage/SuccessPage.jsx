@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components"
+import styled from "styled-components";
+import { SEATLIST } from "../../mock";
 
 export default function SuccessPage({sucessInfos}) {
     const {tickets, filmName, filmDay, filmTime, buyerName, buyerCPF, setTickets, setBuyerName, setBuyerCPF} = sucessInfos;
+    const {seats} = SEATLIST;
 
     function resetOrder(){
         setTickets([]);
@@ -22,11 +24,15 @@ export default function SuccessPage({sucessInfos}) {
 
             <TextContainer>
                 <strong><p>Ingressos</p></strong>
-                {tickets.map(ticketSeat => 
-                    <p key={ticketSeat}>
-                        Assento {ticketSeat.toString().slice(3)}
-                    </p>
-                )}
+                {seats.map(seat => {
+                    if (tickets.includes(seat.id)){
+                        return (
+                            <p key={seat.id}>
+                                Assento {seat.name.padStart(2, '0')}
+                            </p>
+                        )
+                    }
+                })}
             </TextContainer>
 
             <TextContainer>
