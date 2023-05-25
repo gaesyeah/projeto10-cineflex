@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
 	}
 	*{
 		user-select: none;
+		color-scheme: only light;
 	}
 	button {
 		height: 43px;
