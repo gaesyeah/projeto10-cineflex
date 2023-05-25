@@ -10,9 +10,9 @@ export default function SessionsPage({filmDayRef, filmTimeRef}) {
 
     const [sessionList, setSessionList] = useState(null);
 
-    const sessoesParam = useParams().idSession;
+    const {idSession} = useParams();
     useEffect(() => {
-        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${sessoesParam}/showtimes`)
+        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idSession}/showtimes`)
         .then(sucess => setSessionList(sucess.data))
         .catch(error => alert(error.response.data))
     }, []);

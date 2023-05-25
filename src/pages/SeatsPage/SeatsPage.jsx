@@ -12,9 +12,9 @@ export default function SeatsPage({ seatInfos }) {
     const { filmNameRef, buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF, seatList, setSeatList } = seatInfos;
     const navigate = useNavigate();
 
-    const assentosParam = useParams().idSeat;
+    const {idSeat} = useParams();
     useEffect(() => {
-        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${assentosParam}/seats`)
+        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSeat}/seats`)
         .then(sucess => setSeatList(sucess.data))
         .catch(error => alert(error.response.data))
     }, []);
