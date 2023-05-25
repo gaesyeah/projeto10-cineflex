@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { cpf } from "cpf-cnpj-validator";
 import axios from "axios";
+import { useRef } from "react";
 
 export default function SeatsPage({ seatInfos }) {
     const { tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
@@ -20,9 +21,29 @@ export default function SeatsPage({ seatInfos }) {
         .catch(error => alert(error.response.data))
     }, []);
 
+    //-------------------------------------------------------------------
+    const firstCPFchange = useRef(false);
+    const firstNameChange = useRef(false);
+    useEffect(() => {
+        if (buyerCPF !== '' && firstCPFchange.current === false){
+            firstCPFchange.current = true;
+            console.log('CPF');
+        }
+        if (buyerName !== '' && firstNameChange.current === false){
+            firstNameChange.current = true;
+            console.log('name');
+        }
+    }, [buyerCPF, buyerName]);
+
     function validateCPF(jsx){
-        if (buyerCPF === '') {
-            return;
+        if (firstCPFchange.current && buyerCPF === '') {
+            if (!jsx){
+                return 'red';
+            } else {
+                return <p>Este campo não pode ficar vazio</p>;
+            }
+        } else if (buyerCPF === ''){
+            return;            
         } else if (!cpf.isValid(buyerCPF)) {
             if (!jsx){
                 return 'red';
@@ -31,6 +52,18 @@ export default function SeatsPage({ seatInfos }) {
             }
         }
     }
+    function validateName(jsx){
+        if (firstNameChange.current && buyerName === '') {
+            if (!jsx){
+                return 'red';
+            } else {
+                return <p>Este campo não pode ficar vazio</p>;
+            }
+        } else if (buyerName === ''){
+            return;            
+        } 
+    }
+    //-------------------------------------------------------------------
 
     if (seatList === null){
         return (
@@ -77,14 +110,16 @@ export default function SeatsPage({ seatInfos }) {
                     </CaptionItem>
                 </CaptionContainer>
     
-                <FormContainer validateCPF={validateCPF}>
-                    Nome do Comprador:
+                <FormContainer 
+                    validateName={validateName}
+                    validateCPF={validateCPF}
+                >Nome do Comprador:
                     <input
                         placeholder="Digite seu nome..."
                         value={buyerName}
                         onChange={(e) => setBuyerName(e.target.value)}
                     />
-    
+                    {validateName(true)}
                     CPF do Comprador:
                     <input
                         placeholder="Digite seu CPF..."
@@ -147,6 +182,9 @@ const FormContainer = styled.div`
     }
     input {
         width: calc(100vw - 60px);
+        &:nth-child(1){
+            border-color: ${({validateName}) => validateName(false)}
+        }
         &:nth-child(2){
             border-color: ${({validateCPF}) => validateCPF(false)}
         }

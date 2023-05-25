@@ -54,6 +54,7 @@ const PageContainer = styled.div`
 `
 const ListContainer = styled.div`
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     margin-top: 20px;
     max-width: 865px;
