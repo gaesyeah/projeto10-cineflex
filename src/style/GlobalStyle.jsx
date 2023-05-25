@@ -24,7 +24,9 @@ const GlobalStyle = createGlobalStyle`
 			border: 2px solid #E8833A;
 		}
 		&:disabled {
-			background-color: lightgray;
+			background: lightgray;
+			border-color: lightgray;
+			color: #FFFFFF;
 			cursor: not-allowed;
 		}
 	}
