@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Loading from "../../style/Loading";
 import loadingGif from "./../../assets/loading.gif";
-import { SEATLIST } from "../../mock";
 import Seat from "../../components/Seat";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { cpf } from "cpf-cnpj-validator";
+import axios from "axios";
 
 export default function SeatsPage({ seatInfos }) {
     const { tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
@@ -13,11 +13,24 @@ export default function SeatsPage({ seatInfos }) {
 
     const [seatList, setSeatList] = useState(null);
 
+    const assentosParam = useParams().idSeat;
     useEffect(() => {
-        setTimeout(() => {
-            setSeatList({...SEATLIST});
-        }, 500);
-    }, [])
+        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${assentosParam}/seats`)
+        .then(sucess => setSeatList(sucess.data))
+        .catch(error => alert(error.response.data))
+    }, []);
+
+    function validateCPF(jsx){
+        if (buyerCPF === '') {
+            return;
+        } else if (!cpf.isValid(buyerCPF)) {
+            if (!jsx){
+                return 'red';
+            } else {
+                return <p>Digite um CPF válido</p>;
+            }
+        }
+    }
 
     if (seatList === null){
         return (
@@ -64,7 +77,7 @@ export default function SeatsPage({ seatInfos }) {
                     </CaptionItem>
                 </CaptionContainer>
     
-                <FormContainer buyerCPF={buyerCPF}>
+                <FormContainer validateCPF={validateCPF}>
                     Nome do Comprador:
                     <input
                         placeholder="Digite seu nome..."
@@ -78,17 +91,10 @@ export default function SeatsPage({ seatInfos }) {
                         value={buyerCPF}
                         onChange={(e) => setBuyerCPF(e.target.value)}
                     />
-                    {(buyerCPF === '') 
-                        ? 
-                        undefined 
-                        :
-                        (!cpf.isValid(buyerCPF)) 
-                            && 
-                            <p>Digite um CPF válido</p>
-                    }
+                    {validateCPF(true)}
                     <button  
                         disabled={(!buyerName || !cpf.isValid(buyerCPF) || tickets.length === 0) ? true : false}
-                        onClick={() => navigate('/sucess')}
+                        onClick={() => navigate('/sucesso')}
                     >Reservar Assento
                     </button>
                 </FormContainer>
@@ -142,7 +148,7 @@ const FormContainer = styled.div`
     input {
         width: calc(100vw - 60px);
         &:nth-child(2){
-            border-color: ${({buyerCPF}) => (buyerCPF === '') ? undefined : ((!cpf.isValid(buyerCPF)) && 'red')};
+            border-color: ${({validateCPF}) => validateCPF(false)}
         }
     }
     p {

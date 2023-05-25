@@ -9,7 +9,7 @@ export default function Session({day, filmDayRef, filmTimeRef}) {
         filmDayRef.current = date;
         filmTimeRef.current = showtimes[index].name;
 
-        navigate('/seats');
+        navigate(`/assentos/${showtimes[index].id}`);
     }
 
     return (

@@ -3,17 +3,23 @@ import sucessLoading from "./../../assets/sucessLoading.gif";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { cpf } from "cpf-cnpj-validator";
+import axios from "axios";
 
 export default function SuccessPage({sucessInfos}) {
     const {filmNameRef, filmDayRef, filmTimeRef, tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
+    const userReserve = {
+        ids: tickets,
+        name: buyerName,
+        cpf: buyerCPF
+    }
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 500);
+        axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
+        .then(() => setLoading(false))
+        .catch(error => alert(error.response.data))
     }, []);
 
     function resetOrder(){

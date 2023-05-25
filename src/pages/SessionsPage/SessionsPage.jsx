@@ -1,18 +1,20 @@
 import styled from "styled-components";
 import Loading from "../../style/Loading";
 import loadingGif from "./../../assets/loading.gif";
-import { SESSIONLIST } from "../../mock";
 import Session from "../../components/Session";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function SessionsPage({filmDayRef, filmTimeRef}) {
 
     const [sessionList, setSessionList] = useState(null);
 
+    const sessoesParam = useParams().idSession;
     useEffect(() => {
-        setTimeout(() => {
-            setSessionList({...SESSIONLIST});
-        }, 500);
+        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${sessoesParam}/showtimes`)
+        .then(sucess => setSessionList(sucess.data))
+        .catch(error => alert(error.response.data))
     }, []);
 
     if (sessionList === null){

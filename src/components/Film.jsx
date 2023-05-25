@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Film({film, filmNameRef}) {
-    const {posterURL, title} = film;
+    const {id ,title, posterURL} = film;
     const navigate = useNavigate();
 
     function selectFilm(){
         filmNameRef.current = title;
         
-        navigate('/sessions');
+        navigate(`/sessoes/${id}`);
     }
 
     return (

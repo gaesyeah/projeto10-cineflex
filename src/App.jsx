@@ -46,9 +46,9 @@ export default function App() {
 
             <Routes>
                 <Route path='/' element={<HomePage filmNameRef={filmNameRef}/>}/>
-                <Route path='/sessions' element={<SessionsPage filmDayRef={filmDayRef} filmTimeRef={filmTimeRef}/>}/> 
-                <Route path='/seats' element={<SeatsPage seatInfos={seatInfos}/>}/>
-                <Route path='/sucess' element={<SuccessPage sucessInfos={sucessInfos}/>}/>
+                <Route path='/sessoes/:idSession' element={<SessionsPage filmDayRef={filmDayRef} filmTimeRef={filmTimeRef}/>}/> 
+                <Route path='/assentos/:idSeat' element={<SeatsPage seatInfos={seatInfos}/>}/>
+                <Route path='/sucesso' element={<SuccessPage sucessInfos={sucessInfos}/>}/>
             </Routes>
         </BrowserRouter>
     )
