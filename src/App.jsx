@@ -21,6 +21,8 @@ export default function App() {
     const [buyedTickets, setBuyedTickets] = useState([]);
     const [buyerName, setBuyerName] = useState('');
     const [buyerCPF, setBuyerCPF] = useState('');
+    //essa lista foi criada fora da página em que está a requisição axios pq ela é usada em outra página filha também
+    const [seatList, setSeatList] = useState(null);
 
     const seatInfos = {
         buyedTickets: buyedTickets, 
@@ -28,7 +30,9 @@ export default function App() {
         buyerName: buyerName,
         setBuyerName: setBuyerName, 
         buyerCPF: buyerCPF,
-        setBuyerCPF: setBuyerCPF
+        setBuyerCPF: setBuyerCPF,
+        seatList: seatList,
+        setSeatList: setSeatList
     }
     const sucessInfos = {
         filmNameRef: filmNameRef,
@@ -39,7 +43,8 @@ export default function App() {
         buyerName: buyerName,
         setBuyerName: setBuyerName,
         buyerCPF: buyerCPF,
-        setBuyerCPF: setBuyerCPF
+        setBuyerCPF: setBuyerCPF,
+        seatList: seatList,
     }
 
     return (

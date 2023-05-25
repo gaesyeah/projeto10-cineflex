@@ -6,7 +6,7 @@ import { cpf } from "cpf-cnpj-validator";
 import axios from "axios";
 
 export default function SuccessPage({sucessInfos}) {
-    const {filmNameRef, filmDayRef, filmTimeRef, buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
+    const {filmNameRef, filmDayRef, filmTimeRef, buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF, seatList,} = sucessInfos;
     const userReserve = {
         ids: buyedTickets,
         name: buyerName,
@@ -47,11 +47,15 @@ export default function SuccessPage({sucessInfos}) {
 
             <TextContainer>
                 <strong><p>Ingressos</p></strong>
-                {buyedTickets.map(id => 
-                    <p key={id}>
-                        Assento {id.toString().slice(3)}
-                    </p>
-                )}
+                {seatList.seats.map(seat => {
+                    if (buyedTickets.includes(seat.id)){
+                        return (
+                            <p key={seat.id}>
+                                Assento {seat.name.padStart(2, '0')}
+                            </p>
+                        )
+                    }
+                })}
             </TextContainer>
 
             <TextContainer>

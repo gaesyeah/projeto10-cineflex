@@ -9,10 +9,8 @@ import axios from "axios";
 import { useRef } from "react";
 
 export default function SeatsPage({ seatInfos }) {
-    const { buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
+    const { buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF, seatList, setSeatList } = seatInfos;
     const navigate = useNavigate();
-
-    const [seatList, setSeatList] = useState(null);
 
     const assentosParam = useParams().idSeat;
     useEffect(() => {
