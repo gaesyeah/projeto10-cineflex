@@ -33,7 +33,7 @@ export default function SeatsPage({ seatInfos }) {
 
     function validateCPF(){
         if (firstCPFchange.current && buyerCPF === '') {
-            return <p>Este campo não pode ficar vazio</p>;
+            return <p>Este campo não pode estar vazio</p>;
         } else if (buyerCPF === ''){
             return;            
         } else if (!cpf.isValid(buyerCPF)) {
@@ -42,7 +42,7 @@ export default function SeatsPage({ seatInfos }) {
     }
     function validateName(){
         if (firstNameChange.current && buyerName === '') {
-            return <p>Este campo não pode ficar vazio</p>;
+            return <p>Este campo não pode estar vazio</p>;
         }
     }
     //-------------------------------------------------------------------
@@ -103,7 +103,7 @@ export default function SeatsPage({ seatInfos }) {
                     CPF do Comprador:
                     <input
                         placeholder="Digite seu CPF..."
-                        value={buyerCPF}
+                        value={cpf.format(buyerCPF)}
                         onChange={(e) => setBuyerCPF(e.target.value)}
                     />
                     {validateCPF()}
