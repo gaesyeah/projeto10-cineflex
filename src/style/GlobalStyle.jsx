@@ -1,12 +1,8 @@
 import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
-	:root {
-		color-scheme: only light;
-	}
 	*{
 		user-select: none;
-		color-scheme: only light;
 	}
 	button {
 		height: 43px;
