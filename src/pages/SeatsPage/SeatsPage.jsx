@@ -182,9 +182,7 @@ const FormContainer = styled.div`
     }
     input {
         width: calc(100vw - 60px);
-        &:nth-child(1){
-            border-color: ${({validateName}) => validateName(false)}
-        }
+        border-color: ${({validateName}) => validateName(false)};
         &:nth-child(2){
             border-color: ${({validateCPF}) => validateCPF(false)}
         }
