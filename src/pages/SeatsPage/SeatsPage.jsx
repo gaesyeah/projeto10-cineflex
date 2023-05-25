@@ -9,7 +9,7 @@ import axios from "axios";
 import { useRef } from "react";
 
 export default function SeatsPage({ seatInfos }) {
-    const { tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
+    const { buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF } = seatInfos;
     const navigate = useNavigate();
 
     const [seatList, setSeatList] = useState(null);
@@ -67,8 +67,8 @@ export default function SeatsPage({ seatInfos }) {
                         <Seat
                             seat={seat}
                             key={seat.id}
-                            tickets={tickets}
-                            setTickets={setTickets}
+                            buyedTickets={buyedTickets}
+                            setBuyedTickets={setBuyedTickets}
                         />
                     )}
                 </SeatsContainer>
@@ -110,7 +110,7 @@ export default function SeatsPage({ seatInfos }) {
                     />
                     {validateCPF()}
                     <button  
-                        disabled={(!buyerName || !cpf.isValid(buyerCPF) || tickets.length === 0) ? true : false}
+                        disabled={(!buyerName || !cpf.isValid(buyerCPF) || buyedTickets.length === 0) ? true : false}
                         onClick={() => navigate('/sucesso')}
                     >Reservar Assento
                     </button>

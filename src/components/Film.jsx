@@ -12,19 +12,19 @@ export default function Film({film, filmNameRef}) {
         navigate(`/sessoes/${id}`);
     }
 
-    const [showName, setShowName] = useState(false)
+    const [showTitle, setShowTitle] = useState(false)
 
     return (
         <MovieContainer
-            onMouseEnter={() => setShowName(true)}
-            onMouseLeave={() => setShowName(false)}
+            onMouseEnter={() => setShowTitle(true)}
+            onMouseLeave={() => setShowTitle(false)}
             onClick={selectFilm}
         >
             <img
                 src={posterURL} 
                 alt="poster"
             />
-            {showName && <div><p>{title}</p></div>}
+            {showTitle && <div><p>{title}</p></div>}
         </MovieContainer>
     );
 }

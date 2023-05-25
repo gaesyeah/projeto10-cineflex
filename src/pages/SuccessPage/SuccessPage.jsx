@@ -6,9 +6,9 @@ import { cpf } from "cpf-cnpj-validator";
 import axios from "axios";
 
 export default function SuccessPage({sucessInfos}) {
-    const {filmNameRef, filmDayRef, filmTimeRef, tickets, setTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
+    const {filmNameRef, filmDayRef, filmTimeRef, buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF} = sucessInfos;
     const userReserve = {
-        ids: tickets,
+        ids: buyedTickets,
         name: buyerName,
         cpf: buyerCPF
     }
@@ -23,7 +23,7 @@ export default function SuccessPage({sucessInfos}) {
     }, []);
 
     function resetOrder(){
-        setTickets([]);
+        setBuyedTickets([]);
         setBuyerName('');
         setBuyerCPF('');
         
@@ -47,7 +47,7 @@ export default function SuccessPage({sucessInfos}) {
 
             <TextContainer>
                 <strong><p>Ingressos</p></strong>
-                {tickets.map(id => 
+                {buyedTickets.map(id => 
                     <p key={id}>
                         Assento {id.toString().slice(3)}
                     </p>

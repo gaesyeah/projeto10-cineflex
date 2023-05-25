@@ -18,13 +18,13 @@ export default function App() {
     const filmDayRef = useRef(undefined);
     const filmTimeRef = useRef(undefined);
 
-    const [tickets, setTickets] = useState([]);
+    const [buyedTickets, setBuyedTickets] = useState([]);
     const [buyerName, setBuyerName] = useState('');
     const [buyerCPF, setBuyerCPF] = useState('');
 
     const seatInfos = {
-        tickets: tickets, 
-        setTickets: setTickets,
+        buyedTickets: buyedTickets, 
+        setBuyedTickets: setBuyedTickets,
         buyerName: buyerName,
         setBuyerName: setBuyerName, 
         buyerCPF: buyerCPF,
@@ -34,8 +34,8 @@ export default function App() {
         filmNameRef: filmNameRef,
         filmDayRef: filmDayRef, 
         filmTimeRef: filmTimeRef, 
-        tickets: tickets,
-        setTickets: setTickets,
+        buyedTickets: buyedTickets,
+        setBuyedTickets: setBuyedTickets,
         buyerName: buyerName,
         setBuyerName: setBuyerName,
         buyerCPF: buyerCPF,
