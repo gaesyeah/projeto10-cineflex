@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import sucessLoading from "./../../assets/sucessLoading.gif";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { cpf } from "cpf-cnpj-validator";
 import axios from "axios";
 
@@ -14,21 +14,30 @@ export default function SuccessPage({sucessInfos}) {
     }
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(true);
+    //fiz isso para zerar os valores que estão vindo do componente pai assim que a requisição post é retornada
+    //não precisa ser variavel de estado porque esses valores estão definidos antes mesmo dessa pagina ser carregada
+    const sucessFilmName = useRef(filmNameRef.current);
+    const sucessFilmDay = useRef(filmDayRef.current);
+    const sucessFilmTime = useRef(filmTimeRef.current);
+    const sucessBuyedTickets = useRef([...buyedTickets]);
+    const sucessBuyerName = useRef(buyerName);
+    const sucessBuyerCPF = useRef(buyerCPF);
 
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
-        .then(() => setLoading(false))
+        .then(() => {
+            filmNameRef.current = undefined;
+            filmDayRef.current = undefined;
+            filmTimeRef.current = undefined;
+            setBuyedTickets([]);
+            setBuyerName('');
+            setBuyerCPF('');
+
+            setLoading(false);
+        })
         .catch(error => alert(error.response.data))
     }, []);
-
-    function resetOrder(){
-        setBuyedTickets([]);
-        setBuyerName('');
-        setBuyerCPF('');
-        
-        navigate('/');
-    }
 
     return (
         <PageContainer>
@@ -41,14 +50,14 @@ export default function SuccessPage({sucessInfos}) {
 
             <TextContainer>
                 <strong><p>Filme e sessão</p></strong>
-                <p>{filmNameRef.current}</p>
-                <p>{filmDayRef.current} {filmTimeRef.current}</p>
+                <p>{sucessFilmName.current}</p>
+                <p>{sucessFilmDay.current} {sucessFilmTime.current}</p>
             </TextContainer>
 
             <TextContainer>
                 <strong><p>Ingressos</p></strong>
                 {seatList.seats.map(seat => {
-                    if (buyedTickets.includes(seat.id)){
+                    if (sucessBuyedTickets.current.includes(seat.id)){
                         return (
                             <p key={seat.id}>
                                 Assento {seat.name.padStart(2, '0')}
@@ -60,11 +69,11 @@ export default function SuccessPage({sucessInfos}) {
 
             <TextContainer>
                 <strong><p>Comprador</p></strong>
-                <p>Nome: {buyerName}</p>
-                <p>CPF: {cpf.format(buyerCPF)}</p>
+                <p>Nome: {sucessBuyerName.current}</p>
+                <p>CPF: {cpf.format(sucessBuyerCPF.current)}</p>
             </TextContainer>
 
-                <button disabled={loading} onClick={resetOrder}>
+                <button disabled={loading} onClick={() => navigate('/')}>
                     Voltar para Home
                 </button>
         </PageContainer>
