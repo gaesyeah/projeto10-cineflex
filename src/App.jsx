@@ -47,8 +47,8 @@ export default function App() {
             <NavContainer>
                 {(window.location.pathname !== '/')
                     &&
-                    <div>
-                        <img onClick={() => navigate(-1)} src={backArrow} alt='back'/>
+                    <div onClick={() => navigate(-1)}>
+                        <img src={backArrow} alt='back'/>
                     </div>
                 }
                 CINEFLEX
