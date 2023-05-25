@@ -9,7 +9,7 @@ import axios from "axios";
 import { useRef } from "react";
 
 export default function SeatsPage({ seatInfos }) {
-    const { buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF, seatList, setSeatList } = seatInfos;
+    const { filmNameRef, buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF, seatList, setSeatList } = seatInfos;
     const navigate = useNavigate();
 
     const assentosParam = useParams().idSeat;
@@ -19,6 +19,13 @@ export default function SeatsPage({ seatInfos }) {
         .catch(error => alert(error.response.data))
     }, []);
 
+    function confirmPurchase(){
+        if (!filmNameRef.current){
+            alert('para fazer uma nova compra volte para a página inicial');
+        } else {
+            navigate('/sucesso');
+        }
+    }
     //-------------------------------------------------------------------
     const firstCPFchange = useRef(false);
     const firstNameChange = useRef(false);
@@ -109,7 +116,7 @@ export default function SeatsPage({ seatInfos }) {
                     {validateCPF()}
                     <button  
                         disabled={(!buyerName || !cpf.isValid(buyerCPF) || buyedTickets.length === 0) ? true : false}
-                        onClick={() => navigate('/sucesso')}
+                        onClick={confirmPurchase}
                     >Reservar Assento
                     </button>
                 </FormContainer>

@@ -25,6 +25,9 @@ export default function App() {
     const [seatList, setSeatList] = useState(null);
 
     const seatInfos = {
+        //mandei essa ref para não permitir o usuario comprar de novo sem antes voltar para a página home
+        filmNameRef: filmNameRef,
+
         buyedTickets: buyedTickets, 
         setBuyedTickets: setBuyedTickets,
         buyerName: buyerName,
