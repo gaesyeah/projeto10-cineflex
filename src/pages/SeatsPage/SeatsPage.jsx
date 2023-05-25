@@ -105,6 +105,7 @@ export default function SeatsPage({ seatInfos }) {
                         placeholder="Digite seu nome..."
                         value={buyerName}
                         onChange={(e) => setBuyerName(e.target.value)}
+                        data-test="client-name"
                     />
                     {validateName()}
                     CPF do Comprador:
@@ -112,16 +113,18 @@ export default function SeatsPage({ seatInfos }) {
                         placeholder="Digite seu CPF..."
                         value={cpf.format(buyerCPF)}
                         onChange={(e) => setBuyerCPF(e.target.value)}
+                        data-test="client-cpf"
                     />
                     {validateCPF()}
                     <button  
                         disabled={(!buyerName || !cpf.isValid(buyerCPF) || buyedTickets.length === 0) ? true : false}
                         onClick={confirmPurchase}
+                        data-test="book-seat-btn"
                     >Reservar Assento
                     </button>
                 </FormContainer>
     
-                <FooterContainer>
+                <FooterContainer data-test="footer">
                     <div>
                         <img src={movie.posterURL} alt="poster" />
                     </div>

@@ -40,7 +40,7 @@ export default function SessionsPage({filmDayRef, filmTimeRef}) {
                     )}
                 </div>
     
-                <FooterContainer>
+                <FooterContainer data-test="footer">
                     <div>
                         <img src={posterURL} alt="poster" />
                     </div>

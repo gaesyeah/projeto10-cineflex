@@ -13,14 +13,18 @@ export default function Session({day, filmDayRef, filmTimeRef}) {
     }
 
     return (
-        <SessionContainer>
+        <SessionContainer data-test="movie-day">
             {weekday} - {date}
             <ButtonsContainer>
-                <button onClick={() => selectDate(0)}>
-                    {showtimes[0].name}
+                <button 
+                    onClick={() => selectDate(0)} 
+                    data-test="showtime"
+                >{showtimes[0].name}
                 </button>
-                <button onClick={() => selectDate(1)}>
-                    {showtimes[1].name}
+                <button 
+                    onClick={() => selectDate(1)} 
+                    data-test="showtime"
+                >{showtimes[1].name}
                 </button>
             </ButtonsContainer>
         </SessionContainer>

@@ -23,11 +23,12 @@ export default function Seat({ seat, buyedTickets, setBuyedTickets }) {
     }
 
     return (
-        <SeatItem
+        <SeatItem 
             id={id}
             available={isAvailable}
             buyedTickets={buyedTickets}
             onClick={selectSeat}
+            data-test="seat"
         >{name.padStart(2, '0')}
         </SeatItem>
     );

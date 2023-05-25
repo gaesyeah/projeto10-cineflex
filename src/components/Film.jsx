@@ -19,6 +19,7 @@ export default function Film({film, filmNameRef}) {
             onMouseEnter={() => setShowTitle(true)}
             onMouseLeave={() => setShowTitle(false)}
             onClick={selectFilm}
+            data-test="movie"
         >
             <img
                 src={posterURL} 

@@ -55,7 +55,10 @@ export default function App() {
             <NavContainer>
                 {(window.location.pathname !== '/' && window.location.pathname !== '/sucesso')
                     &&
-                    <div onClick={() => navigate(-1)}>
+                    <div 
+                        onClick={() => navigate(-1)}
+                        data-test="go-home-header-btn"
+                    >
                         <img src={backArrow} alt='back'/>
                     </div>
                 }

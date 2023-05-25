@@ -48,13 +48,13 @@ export default function SuccessPage({sucessInfos}) {
             }
             <h1>Pedido feito <br /> com sucesso!</h1>
 
-            <TextContainer>
+            <TextContainer data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
                 <p>{sucessFilmName.current}</p>
                 <p>{sucessFilmDay.current} {sucessFilmTime.current}</p>
             </TextContainer>
 
-            <TextContainer>
+            <TextContainer data-test="seats-info">
                 <strong><p>Ingressos</p></strong>
                 {seatList.seats.map(seat => {
                     if (sucessBuyedTickets.current.includes(seat.id)){
@@ -67,14 +67,17 @@ export default function SuccessPage({sucessInfos}) {
                 })}
             </TextContainer>
 
-            <TextContainer>
+            <TextContainer data-test="client-info">
                 <strong><p>Comprador</p></strong>
                 <p>Nome: {sucessBuyerName.current}</p>
                 <p>CPF: {cpf.format(sucessBuyerCPF.current)}</p>
             </TextContainer>
 
-                <button disabled={loading} onClick={() => navigate('/')}>
-                    Voltar para Home
+                <button 
+                    disabled={loading} 
+                    onClick={() => navigate('/')} 
+                    data-test="go-home-btn"
+                >Voltar para Home
                 </button>
         </PageContainer>
     );
