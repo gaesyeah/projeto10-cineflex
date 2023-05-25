@@ -76,6 +76,7 @@ const NavContainer = styled.div`
     font-size: 34px;
     position: fixed;
     top: 0;
+    z-index: 1;
     div{
         height: 40px;
         border-radius: 100%;
