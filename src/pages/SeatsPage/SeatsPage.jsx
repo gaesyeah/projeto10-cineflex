@@ -27,7 +27,7 @@ export default function SeatsPage({ seatInfos }) {
         );
     } else {
         const { seats, movie, day, name } = seatList;
-        
+
         return (
             <PageContainer>
                 Selecione o(s) assento(s)
@@ -64,7 +64,7 @@ export default function SeatsPage({ seatInfos }) {
                     </CaptionItem>
                 </CaptionContainer>
     
-                <FormContainer>
+                <FormContainer buyerCPF={buyerCPF}>
                     Nome do Comprador:
                     <input
                         placeholder="Digite seu nome..."
@@ -78,7 +78,14 @@ export default function SeatsPage({ seatInfos }) {
                         value={buyerCPF}
                         onChange={(e) => setBuyerCPF(e.target.value)}
                     />
-    
+                    {(buyerCPF === '') 
+                        ? 
+                        undefined 
+                        :
+                        (!cpf.isValid(buyerCPF)) 
+                            && 
+                            <p>Digite um CPF válido</p>
+                    }
                     <button  
                         disabled={(!buyerName || !cpf.isValid(buyerCPF) || tickets.length === 0) ? true : false}
                         onClick={() => navigate('/sucess')}
@@ -134,6 +141,16 @@ const FormContainer = styled.div`
     }
     input {
         width: calc(100vw - 60px);
+        &:nth-child(2){
+            border-color: ${({buyerCPF}) => (buyerCPF === '') ? undefined : ((!cpf.isValid(buyerCPF)) && 'red')};
+        }
+    }
+    p {
+        margin-top: -23px;
+        margin-left: 3px;
+        margin-bottom: 6px;
+        font-size: 17px;
+        color: red;
     }
 `
 const CaptionContainer = styled.div`
