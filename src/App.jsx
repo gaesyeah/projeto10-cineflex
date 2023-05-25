@@ -1,15 +1,18 @@
-import styled from "styled-components"
-import HomePage from "./pages/HomePage/HomePage"
-import SessionsPage from "./pages/SessionsPage/SessionsPage"
-import SeatsPage from "./pages/SeatsPage/SeatsPage"
-import SuccessPage from "./pages/SuccessPage/SuccessPage"
-import { useState, useRef } from "react"
-import axios from "axios"
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import styled from "styled-components";
+import backArrow from "./assets/backArrow.png";
+import HomePage from "./pages/HomePage/HomePage";
+import SessionsPage from "./pages/SessionsPage/SessionsPage";
+import SeatsPage from "./pages/SeatsPage/SeatsPage";
+import SuccessPage from "./pages/SuccessPage/SuccessPage";
+import { useState, useRef } from "react";
+import axios from "axios";
+import {Routes, Route, useNavigate} from "react-router-dom";
 
 export default function App() {
 
     axios.defaults.headers.common['Authorization'] = 'UqDNr1vMuiRxXaMyk5kaWHGj';
+
+    const navigate  = useNavigate();
 
     const filmNameRef = useRef(undefined);
     const filmDayRef = useRef(undefined);
@@ -40,9 +43,16 @@ export default function App() {
     }
 
     return (
-        <BrowserRouter>
-
-            <NavContainer>CINEFLEX</NavContainer>
+        <>
+            <NavContainer>
+                {(window.location.pathname !== '/')
+                    &&
+                    <div>
+                        <img onClick={() => navigate(-1)} src={backArrow}/>
+                    </div>
+                }
+                CINEFLEX
+            </NavContainer>
 
             <Routes>
                 <Route path='/' element={<HomePage filmNameRef={filmNameRef}/>}/>
@@ -50,7 +60,7 @@ export default function App() {
                 <Route path='/assentos/:idSeat' element={<SeatsPage seatInfos={seatInfos}/>}/>
                 <Route path='/sucesso' element={<SuccessPage sucessInfos={sucessInfos}/>}/>
             </Routes>
-        </BrowserRouter>
+        </>
     )
 }
 
@@ -66,8 +76,19 @@ const NavContainer = styled.div`
     font-size: 34px;
     position: fixed;
     top: 0;
-    a {
-        text-decoration: none;
-        color: #E8833A;
+    div{
+        height: 40px;
+        border-radius: 100%;
+        position: absolute;
+        left: 0px;
+        margin-left: 16px;
+        &:hover{
+            background-color: #E5E5E5;
+        }
+    }
+    img{
+        margin-top: 4px;
+        width: 40px;
+        cursor: pointer;
     }
 `
