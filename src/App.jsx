@@ -50,7 +50,7 @@ export default function App() {
     return (
         <>
             <NavContainer>
-                {(window.location.pathname !== '/')
+                {(window.location.pathname !== '/' && window.location.pathname !== '/sucesso')
                     &&
                     <div onClick={() => navigate(-1)}>
                         <img src={backArrow} alt='back'/>
