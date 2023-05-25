@@ -27,11 +27,9 @@ export default function SeatsPage({ seatInfos }) {
     useEffect(() => {
         if (buyerCPF !== '' && firstCPFchange.current === false){
             firstCPFchange.current = true;
-            console.log('CPF');
         }
         if (buyerName !== '' && firstNameChange.current === false){
             firstNameChange.current = true;
-            console.log('name');
         }
     }, [buyerCPF, buyerName]);
 
