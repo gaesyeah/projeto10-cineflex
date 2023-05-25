@@ -33,33 +33,19 @@ export default function SeatsPage({ seatInfos }) {
         }
     }, [buyerCPF, buyerName]);
 
-    function validateCPF(jsx){
+    function validateCPF(){
         if (firstCPFchange.current && buyerCPF === '') {
-            if (!jsx){
-                return 'red';
-            } else {
-                return <p>Este campo não pode ficar vazio</p>;
-            }
+            return <p>Este campo não pode ficar vazio</p>;
         } else if (buyerCPF === ''){
             return;            
         } else if (!cpf.isValid(buyerCPF)) {
-            if (!jsx){
-                return 'red';
-            } else {
-                return <p>Digite um CPF válido</p>;
-            }
+            return <p>Digite um CPF válido</p>;
         }
     }
-    function validateName(jsx){
+    function validateName(){
         if (firstNameChange.current && buyerName === '') {
-            if (!jsx){
-                return 'red';
-            } else {
-                return <p>Este campo não pode ficar vazio</p>;
-            }
-        } else if (buyerName === ''){
-            return;            
-        } 
+            return <p>Este campo não pode ficar vazio</p>;
+        }
     }
     //-------------------------------------------------------------------
 
@@ -108,23 +94,21 @@ export default function SeatsPage({ seatInfos }) {
                     </CaptionItem>
                 </CaptionContainer>
     
-                <FormContainer 
-                    validateName={validateName}
-                    validateCPF={validateCPF}
-                >Nome do Comprador:
+                <FormContainer>
+                    Nome do Comprador:
                     <input
                         placeholder="Digite seu nome..."
                         value={buyerName}
                         onChange={(e) => setBuyerName(e.target.value)}
                     />
-                    {validateName(true)}
+                    {validateName()}
                     CPF do Comprador:
                     <input
                         placeholder="Digite seu CPF..."
                         value={buyerCPF}
                         onChange={(e) => setBuyerCPF(e.target.value)}
                     />
-                    {validateCPF(true)}
+                    {validateCPF()}
                     <button  
                         disabled={(!buyerName || !cpf.isValid(buyerCPF) || tickets.length === 0) ? true : false}
                         onClick={() => navigate('/sucesso')}
@@ -180,10 +164,6 @@ const FormContainer = styled.div`
     }
     input {
         width: calc(100vw - 60px);
-        border-color: ${({validateName}) => validateName(false)};
-        &:nth-child(2){
-            border-color: ${({validateCPF}) => validateCPF(false)}
-        }
     }
     p {
         margin-top: -23px;
