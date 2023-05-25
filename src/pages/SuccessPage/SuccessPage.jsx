@@ -40,14 +40,18 @@ export default function SuccessPage({sucessInfos}) {
     }, []);
 
     return (
-        <PageContainer>
+        <PageContainer sucessFilmName={sucessFilmName}>
             {loading &&
                 <SucessLoading>
                     <img src={sucessLoading} alt='sucessLoading'/>
                 </SucessLoading>
             }
-            <h1>Pedido feito <br /> com sucesso!</h1>
-
+            {!sucessFilmName.current
+                ?
+                <h1>Por favor, volte à página inicial <br /> para fazer um novo pedido!</h1>
+                :
+                <h1>Pedido feito <br /> com sucesso!</h1>
+            }
             <TextContainer data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
                 <p>{sucessFilmName.current}</p>
@@ -120,7 +124,7 @@ const PageContainer = styled.div`
         display: flex;
         align-items: center;
         text-align: center;
-        color: #247A6B;
+        color: ${({sucessFilmName}) => (!sucessFilmName.current) ? '#cf4651' : '#247A6B'};
     }
 `
 const TextContainer = styled.div`

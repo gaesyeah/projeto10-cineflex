@@ -7,8 +7,8 @@ const GlobalStyle = createGlobalStyle`
 	button {
 		height: 43px;
 		background: #E8833A;
+		border: 2px solid #E8833A;
 		border-radius: 3px;
-		border-style: none;
 		font-family: 'Roboto';
 		font-size: 18px;
 		color: #FFFFFF;
@@ -18,6 +18,11 @@ const GlobalStyle = createGlobalStyle`
 		text-align: center;
 		padding: 0 20px;
 		cursor: pointer;
+		&:hover{
+			background: #FFFFFF;
+			color: #E8833A;
+			border: 2px solid #E8833A;
+		}
 		&:disabled {
 			background-color: lightgray;
 			cursor: not-allowed;
