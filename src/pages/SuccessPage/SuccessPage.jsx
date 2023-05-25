@@ -34,7 +34,7 @@ export default function SuccessPage({sucessInfos}) {
         <PageContainer>
             {loading &&
                 <SucessLoading>
-                    <img src={sucessLoading}/>
+                    <img src={sucessLoading} alt='sucessLoading'/>
                 </SucessLoading>
             }
             <h1>Pedido feito <br /> com sucesso!</h1>

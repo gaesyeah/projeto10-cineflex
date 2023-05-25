@@ -18,7 +18,7 @@ export default function HomePage({filmNameRef}) {
     if (filmList === null){
         return (
             <Loading>
-                <img src={loadingGif}/>
+                <img src={loadingGif} alt='loading'/>
             </Loading>
         );
     } else {
@@ -35,7 +35,7 @@ export default function HomePage({filmNameRef}) {
                         />
                     )}
                 </ListContainer>
-    
+
             </PageContainer>
         );
     }
@@ -53,9 +53,10 @@ const PageContainer = styled.div`
     padding-top: 70px;
 `
 const ListContainer = styled.div`
-    width: 330px;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
-    padding: 10px;
+    margin-top: 20px;
+    max-width: 865px;
+    min-width: 340px;
+    gap: 10px;
 `

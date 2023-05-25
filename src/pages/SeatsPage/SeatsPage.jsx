@@ -35,7 +35,7 @@ export default function SeatsPage({ seatInfos }) {
     if (seatList === null){
         return (
             <Loading>
-                <img src={loadingGif}/>
+                <img src={loadingGif} alt='loading'/>
             </Loading>
         );
     } else {

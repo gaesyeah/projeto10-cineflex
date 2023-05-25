@@ -20,7 +20,7 @@ export default function SessionsPage({filmDayRef, filmTimeRef}) {
     if (sessionList === null){
         return (
             <Loading>
-                <img src={loadingGif}/>
+                <img src={loadingGif} alt='loading'/>
             </Loading>
         );
     }else{
