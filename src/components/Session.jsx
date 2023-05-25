@@ -5,27 +5,25 @@ export default function Session({day, filmDayRef, filmTimeRef}) {
     const {weekday, date, showtimes} = day;
     const navigate = useNavigate();
 
-    function selectDate(index){
+    function selectDate(showTime){
         filmDayRef.current = date;
-        filmTimeRef.current = showtimes[index].name;
+        filmTimeRef.current = showTime.name;
 
-        navigate(`/assentos/${showtimes[index].id}`);
+        navigate(`/assentos/${showTime.id}`);
     }
 
     return (
         <SessionContainer data-test="movie-day">
             {weekday} - {date}
             <ButtonsContainer>
-                <button 
-                    onClick={() => selectDate(0)} 
-                    data-test="showtime"
-                >{showtimes[0].name}
-                </button>
-                <button 
-                    onClick={() => selectDate(1)} 
-                    data-test="showtime"
-                >{showtimes[1].name}
-                </button>
+                {showtimes.map(showTime => 
+                    <button
+                        onClick={() => selectDate(showTime)}
+                        key={showTime.id}
+                        data-test="showtime"
+                    >{showTime.name}
+                    </button>
+                )}
             </ButtonsContainer>
         </SessionContainer>
     );
