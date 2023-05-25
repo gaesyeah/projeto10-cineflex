@@ -83,6 +83,7 @@ const NavContainer = styled.div`
     top: 0;
     z-index: 1;
     div{
+        cursor: pointer;
         height: 40px;
         border-radius: 100%;
         position: absolute;
@@ -95,6 +96,5 @@ const NavContainer = styled.div`
     img{
         margin-top: 4px;
         width: 40px;
-        cursor: pointer;
     }
 `

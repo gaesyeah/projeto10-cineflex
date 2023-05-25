@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
+	*{
+		user-select: none;
+	}
 	button {
 		height: 43px;
 		background: #E8833A;
