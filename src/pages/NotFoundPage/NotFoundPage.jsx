@@ -7,12 +7,10 @@ export default function NotFoundPage() {
     const navigate = useNavigate();
 
     return (
-        <>
-            <NotFound>
-                <img src={error}/>
-                <button onClick={() => navigate('/')}>Voltar Home</button>
-            </NotFound>
-        </>
+        <NotFound>
+            <img src={error}/>
+            <button onClick={() => navigate('/')}>Voltar Home</button>
+        </NotFound>
     );
 }
 
