@@ -20,35 +20,36 @@ export default function SeatsPage({filmNameRef}) {
 
     const {idSeat} = useParams();
     useEffect(() => {
+        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSeat}/seats`)
+        .then(sucess => setSeatList(sucess.data))
+        .catch(error => {
+            const {message} = error.response.data;
+            const {status, statusText} = error.response;
+            navigate('/requestError', {state: {message, status, statusText}})
+        });
+    }, []);
+
+    function submitPurchase(e){
+        e.preventDefault();
+
         if (!filmNameRef.current){
-            navigate('/');
-        } else {
-            axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSeat}/seats`)
-            .then(sucess => setSeatList(sucess.data))
+            alert('Você será redirecionado à página inicial para fazer uma nova compra')
+            navigate('/')
+        } else{
+            setSubmitLoading(true);
+
+            const userReserve = {ids: buyedTickets, name: buyerName, cpf: buyerCPF}
+            axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
+            .then(() => {
+                setSubmitLoading(false);
+                navigate('/sucesso', {state: {seatList, buyedTickets, buyerName, buyerCPF}});
+            })
             .catch(error => {
                 const {message} = error.response.data;
                 const {status, statusText} = error.response;
                 navigate('/requestError', {state: {message, status, statusText}})
             });
         }
-    }, []);
-
-    function submitPurchase(e){
-        e.preventDefault();
-
-        setSubmitLoading(true);
-
-        const userReserve = {ids: buyedTickets, name: buyerName, cpf: buyerCPF}
-        axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
-        .then(() => {
-            setSubmitLoading(false);
-            navigate('/sucesso', {state: {seatList, buyedTickets, buyerName, buyerCPF}});
-        })
-        .catch(error => {
-            const {message} = error.response.data;
-            const {status, statusText} = error.response;
-            navigate('/requestError', {state: {message, status, statusText}})
-        });
     }
     //-------------------------------------------------------------------
     const firstCPFchange = useRef(false);
