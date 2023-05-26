@@ -7,7 +7,7 @@ export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
     if (useLocation().state === null){
         return <Navigate to="/"/>
     }
-    if (!filmNameRef){
+    if (!filmNameRef.current){
         return <Navigate to="/"/>
     }
 
