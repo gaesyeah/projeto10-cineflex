@@ -8,7 +8,7 @@ import { useState, useEffect, useRef } from "react";
 import { cpf } from "cpf-cnpj-validator";
 import axios from "axios";
 
-export default function SeatsPage() {
+export default function SeatsPage({filmNameRef}) {
 
     const [buyerName, setBuyerName] = useState('');
     const [buyerCPF, setBuyerCPF] = useState('');
@@ -27,15 +27,21 @@ export default function SeatsPage() {
 
     function submitPurchase(e){
         e.preventDefault();
-        setLoading(true);
 
-        const userReserve = {ids: buyedTickets, name: buyerName, cpf: buyerCPF}
-        axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
-        .then(() => {
-            setLoading(false);
-            navigate('/sucesso', {state: {seatList, buyedTickets, buyerName, buyerCPF}});
-        })
-        .catch(error => {alert(error.response.data)})
+        if (!filmNameRef.current){
+            alert('Você já fez uma compra, e será redirecionado à página inicial');
+            navigate('/');
+        } else {
+            setLoading(true);
+    
+            const userReserve = {ids: buyedTickets, name: buyerName, cpf: buyerCPF}
+            axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
+            .then(() => {
+                setLoading(false);
+                navigate('/sucesso', {state: {seatList, buyedTickets, buyerName, buyerCPF}});
+            })
+            .catch(error => {alert(error.response.data)});
+        }
     }
     //-------------------------------------------------------------------
     const firstCPFchange = useRef(false);

@@ -6,13 +6,14 @@ import SeatsPage from "./pages/SeatsPage/SeatsPage";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
 import { useRef } from "react";
 import axios from "axios";
-import {Routes, Route, useNavigate} from "react-router-dom";
+import {Routes, Route, useNavigate, useLocation} from "react-router-dom";
 
 export default function App() {
 
     axios.defaults.headers.common['Authorization'] = 'UqDNr1vMuiRxXaMyk5kaWHGj';
 
     const navigate  = useNavigate();
+    const {pathname} = useLocation();
 
     const filmNameRef = useRef(undefined);
     const filmDayRef = useRef(undefined);
@@ -21,7 +22,7 @@ export default function App() {
     return (
         <>
             <NavContainer>
-                {(window.location.pathname !== '/' && window.location.pathname !== '/sucesso')
+                {(pathname !== '/' && pathname !== '/sucesso')
                     &&
                     <div 
                         onClick={() => navigate(-1)}
@@ -36,7 +37,7 @@ export default function App() {
             <Routes>
                 <Route path='/' element={<HomePage filmNameRef={filmNameRef}/>}/>
                 <Route path='/sessoes/:idSession' element={<SessionsPage filmDayRef={filmDayRef} filmTimeRef={filmTimeRef}/>}/> 
-                <Route path='/assentos/:idSeat' element={<SeatsPage/>}/>
+                <Route path='/assentos/:idSeat' element={<SeatsPage filmNameRef={filmNameRef}/>}/>
                 <Route path='/sucesso' element={<SuccessPage filmNameRef={filmNameRef} filmDayRef={filmDayRef} filmTimeRef={filmTimeRef}/>}/>
             </Routes>
         </>

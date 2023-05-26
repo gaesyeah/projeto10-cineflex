@@ -1,16 +1,28 @@
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cpf } from "cpf-cnpj-validator";
+import { useEffect } from "react";
 
 export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
 
     const {seatList, buyedTickets, buyerName, buyerCPF} = useLocation().state;
-    
+
     const navigate = useNavigate();
 
+    useEffect(()=> {
+        filmNameRef.current = undefined;
+        filmDayRef.current = undefined;
+        filmTimeRef.current = undefined;
+    }, [])
+
     return (
-        <PageContainer>
-            <h1>Pedido feito <br /> com sucesso!</h1>
+            <PageContainer filmNameRef={filmNameRef}>
+            {!filmNameRef.current
+                ?
+                <h1>Por favor, volte à página inicial <br/> para fazer um novo pedido!</h1>
+                :
+                <h1>Pedido feito <br/> com sucesso!</h1>
+            }
             <TextContainer data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
                 <p>{filmNameRef.current}</p>
@@ -70,7 +82,7 @@ const PageContainer = styled.div`
         display: flex;
         align-items: center;
         text-align: center;
-        color: #247A6B;
+        color: ${({filmNameRef}) => (!filmNameRef.current) ? '#cf4651' : '#247A6B'};
     }
 `
 const TextContainer = styled.div`
