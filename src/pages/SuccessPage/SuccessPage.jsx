@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { cpf } from "cpf-cnpj-validator";
 import { useEffect } from "react";
 
 export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
-
+    if (useLocation().state === null){
+        return <Navigate to="/"/>
+    }
     const {seatList, buyedTickets, buyerName, buyerCPF} = useLocation().state;
 
     const navigate = useNavigate();
