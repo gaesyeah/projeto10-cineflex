@@ -24,7 +24,7 @@ export default function App() {
     return (
         <>
             <NavContainer>
-                {(pathname !== '/' && pathname !== '/sucesso' && pathname !== '/404' && pathname !== '/error')
+                {(pathname !== '/' && pathname !== '/sucesso' && pathname !== '/404' && pathname !== '/requestError')
                     &&
                     <div 
                         onClick={() => navigate(-1)}
@@ -45,7 +45,7 @@ export default function App() {
                 <Route path='*' element={<Navigate to='/404'/>}/>
                 <Route path='/404' element={<NotFoundPage/>}/>
 
-                <Route path='/error' element={<ErrorPage />}/>
+                <Route path='/requestError' element={<ErrorPage />}/>
             </Routes>
         </>
     )

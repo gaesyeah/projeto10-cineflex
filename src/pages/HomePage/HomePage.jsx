@@ -4,15 +4,22 @@ import Loading from "../../style/Loading.jsx";
 import loadingGif from "../../assets/loading.gif";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage({filmNameRef}) {
+
+    const navigate = useNavigate();
 
     const [filmList, setFilmList] = useState(null);
 
     useEffect(() => {
         axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
         .then((sucess) => setFilmList(sucess.data))
-        .catch((error) => alert(error.response.data))
+        .catch((error) => {
+            const {message} = error.response.data;
+            const {status, statusText} = error.response;
+            navigate('/requestError', {state: {message, status, statusText}})
+        })
     }, []);
 
     if (filmList === null){

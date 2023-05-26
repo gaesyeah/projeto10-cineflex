@@ -21,9 +21,16 @@ const OtherPage = styled.div`
     }
     p{
         text-align: center;
-        font-size: 20px
+        font-size: 20px;
+        &:nth-child(2){
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
     }
     h1{
+        font-weight: 600;
+        margin-bottom: -9px;
         font-size: 70px;
         color: #E8833A;
         text-align: center;

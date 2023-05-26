@@ -18,8 +18,8 @@ export default function SessionsPage({filmDayRef, filmTimeRef}) {
         .then(sucess => setSessionList(sucess.data))
         .catch(error => {
             const {message} = error.response.data;
-            const {status} = error.response;
-            navigate('/error', {state: {message, status}})
+            const {status, statusText} = error.response;
+            navigate('/requestError', {state: {message, status, statusText}})
         })
     }, []);
 

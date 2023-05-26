@@ -27,8 +27,8 @@ export default function SeatsPage({filmNameRef}) {
             .then(sucess => setSeatList(sucess.data))
             .catch(error => {
                 const {message} = error.response.data;
-                const {status} = error.response;
-                navigate('/error', {state: {message, status}}) 
+                const {status, statusText} = error.response;
+                navigate('/requestError', {state: {message, status, statusText}})
             });
         }
     }, []);
@@ -46,8 +46,8 @@ export default function SeatsPage({filmNameRef}) {
         })
         .catch(error => {
             const {message} = error.response.data;
-            const {status} = error.response;
-            navigate('/error', {state: {message, status}}) 
+            const {status, statusText} = error.response;
+            navigate('/requestError', {state: {message, status, statusText}})
         });
     }
     //-------------------------------------------------------------------
