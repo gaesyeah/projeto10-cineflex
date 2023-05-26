@@ -25,7 +25,11 @@ export default function SeatsPage({filmNameRef}) {
         } else {
             axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSeat}/seats`)
             .then(sucess => setSeatList(sucess.data))
-            .catch(error => alert(error.response.data));
+            .catch(error => {
+                const {message} = error.response.data;
+                const {status} = error.response;
+                navigate('/error', {state: {message, status}}) 
+            });
         }
     }, []);
 
@@ -40,7 +44,11 @@ export default function SeatsPage({filmNameRef}) {
             setSubmitLoading(false);
             navigate('/sucesso', {state: {seatList, buyedTickets, buyerName, buyerCPF}});
         })
-        .catch(error => {alert(error.response.data)});
+        .catch(error => {
+            const {message} = error.response.data;
+            const {status} = error.response;
+            navigate('/error', {state: {message, status}}) 
+        });
     }
     //-------------------------------------------------------------------
     const firstCPFchange = useRef(false);

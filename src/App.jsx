@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import backArrow from "./assets/backArrow.png";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import NotFoundPage from "./pages/OtherPage/NotFoundPage";
+import ErrorPage from "./pages/OtherPage/ErrorPage";
 import HomePage from "./pages/HomePage/HomePage";
 import SessionsPage from "./pages/SessionsPage/SessionsPage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
@@ -23,7 +24,7 @@ export default function App() {
     return (
         <>
             <NavContainer>
-                {(pathname !== '/' && pathname !== '/sucesso' && pathname !== '/404')
+                {(pathname !== '/' && pathname !== '/sucesso' && pathname !== '/404' && pathname !== '/error')
                     &&
                     <div 
                         onClick={() => navigate(-1)}
@@ -43,6 +44,8 @@ export default function App() {
 
                 <Route path='*' element={<Navigate to='/404'/>}/>
                 <Route path='/404' element={<NotFoundPage/>}/>
+
+                <Route path='/error' element={<ErrorPage />}/>
             </Routes>
         </>
     )
