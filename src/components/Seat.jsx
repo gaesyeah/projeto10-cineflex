@@ -51,4 +51,8 @@ const SeatItem = styled.div`
     background-color: ${({id, available, buyedTickets}) => (
         (!available) ? '#FBE192' : ((!buyedTickets.includes(id)) ? '#C3CFD9': '#1AAE9E')
     )};
+    &:hover{
+        transition-duration: 200ms;
+        color: ${({available}) => ((available) && 'white')};
+    }
 `

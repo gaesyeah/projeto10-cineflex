@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 			background: #FFFFFF;
 			color: #E8833A;
 			border: 2px solid #E8833A;
+			transition-duration: 400ms;
 		}
 		&:disabled {
 			background: lightgray;
