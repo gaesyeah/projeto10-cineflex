@@ -7,6 +7,10 @@ export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
     if (useLocation().state === null){
         return <Navigate to="/"/>
     }
+    if (!filmNameRef){
+        return <Navigate to="/"/>
+    }
+
     const {seatList, buyedTickets, buyerName, buyerCPF} = useLocation().state;
 
     const navigate = useNavigate();
