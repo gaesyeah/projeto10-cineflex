@@ -10,38 +10,37 @@ import axios from "axios";
 
 export default function SeatsPage({filmNameRef}) {
 
+    const [seatList, setSeatList] = useState(null);
     const [buyerName, setBuyerName] = useState('');
     const [buyerCPF, setBuyerCPF] = useState('');
     const [buyedTickets, setBuyedTickets] = useState([]);
-    const [seatList, setSeatList] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [submitLoading, setSubmitLoading] = useState(false);
 
     const navigate = useNavigate();
 
     const {idSeat} = useParams();
     useEffect(() => {
-        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSeat}/seats`)
-        .then(sucess => setSeatList(sucess.data))
-        .catch(error => alert(error.response.data))
+        if (!filmNameRef.current){
+            navigate('/');
+        } else {
+            axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSeat}/seats`)
+            .then(sucess => setSeatList(sucess.data))
+            .catch(error => alert(error.response.data));
+        }
     }, []);
 
     function submitPurchase(e){
         e.preventDefault();
 
-        if (!filmNameRef.current){
-            alert('Você já fez uma compra, e será redirecionado à página inicial');
-            navigate('/');
-        } else {
-            setLoading(true);
-    
-            const userReserve = {ids: buyedTickets, name: buyerName, cpf: buyerCPF}
-            axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
-            .then(() => {
-                setLoading(false);
-                navigate('/sucesso', {state: {seatList, buyedTickets, buyerName, buyerCPF}});
-            })
-            .catch(error => {alert(error.response.data)});
-        }
+        setSubmitLoading(true);
+
+        const userReserve = {ids: buyedTickets, name: buyerName, cpf: buyerCPF}
+        axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
+        .then(() => {
+            setSubmitLoading(false);
+            navigate('/sucesso', {state: {seatList, buyedTickets, buyerName, buyerCPF}});
+        })
+        .catch(error => {alert(error.response.data)});
     }
     //-------------------------------------------------------------------
     const firstCPFchange = useRef(false);
@@ -82,7 +81,7 @@ export default function SeatsPage({filmNameRef}) {
 
         return (
             <PageContainer>
-                {loading &&
+                {submitLoading &&
                     <SucessLoading>
                         <img src={sucessLoading} alt='sucessLoading'/>
                     </SucessLoading>

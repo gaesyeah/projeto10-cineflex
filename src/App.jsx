@@ -1,18 +1,19 @@
 import styled from "styled-components";
 import backArrow from "./assets/backArrow.png";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import HomePage from "./pages/HomePage/HomePage";
 import SessionsPage from "./pages/SessionsPage/SessionsPage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
 import { useRef } from "react";
 import axios from "axios";
-import {Routes, Route, useNavigate, useLocation} from "react-router-dom";
+import {Routes, Route, useNavigate, useLocation, Navigate} from "react-router-dom";
 
 export default function App() {
 
     axios.defaults.headers.common['Authorization'] = 'UqDNr1vMuiRxXaMyk5kaWHGj';
 
-    const navigate  = useNavigate();
+    const navigate = useNavigate();
     const {pathname} = useLocation();
 
     const filmNameRef = useRef(undefined);
@@ -22,7 +23,7 @@ export default function App() {
     return (
         <>
             <NavContainer>
-                {(pathname !== '/' && pathname !== '/sucesso')
+                {(pathname !== '/' && pathname !== '/sucesso' && pathname !== '/404')
                     &&
                     <div 
                         onClick={() => navigate(-1)}
@@ -39,6 +40,9 @@ export default function App() {
                 <Route path='/sessoes/:idSession' element={<SessionsPage filmDayRef={filmDayRef} filmTimeRef={filmTimeRef}/>}/> 
                 <Route path='/assentos/:idSeat' element={<SeatsPage filmNameRef={filmNameRef}/>}/>
                 <Route path='/sucesso' element={<SuccessPage filmNameRef={filmNameRef} filmDayRef={filmDayRef} filmTimeRef={filmTimeRef}/>}/>
+
+                <Route path='*' element={<Navigate to='/404'/>}/>
+                <Route path='/404' element={<NotFoundPage/>}/>
             </Routes>
         </>
     )

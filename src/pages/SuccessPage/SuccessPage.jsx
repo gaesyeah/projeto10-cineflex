@@ -16,13 +16,8 @@ export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
     }, [])
 
     return (
-            <PageContainer filmNameRef={filmNameRef}>
-            {!filmNameRef.current
-                ?
-                <h1>Por favor, volte à página inicial <br/> para fazer um novo pedido!</h1>
-                :
+            <PageContainer>
                 <h1>Pedido feito <br/> com sucesso!</h1>
-            }
             <TextContainer data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
                 <p>{filmNameRef.current}</p>
@@ -82,7 +77,7 @@ const PageContainer = styled.div`
         display: flex;
         align-items: center;
         text-align: center;
-        color: ${({filmNameRef}) => (!filmNameRef.current) ? '#cf4651' : '#247A6B'};
+        color: #247A6B;
     }
 `
 const TextContainer = styled.div`
