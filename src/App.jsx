@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import SessionsPage from "./pages/SessionsPage/SessionsPage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import axios from "axios";
 import {Routes, Route, useNavigate} from "react-router-dom";
 
@@ -17,38 +17,6 @@ export default function App() {
     const filmNameRef = useRef(undefined);
     const filmDayRef = useRef(undefined);
     const filmTimeRef = useRef(undefined);
-
-    const [buyedTickets, setBuyedTickets] = useState([]);
-    const [buyerName, setBuyerName] = useState('');
-    const [buyerCPF, setBuyerCPF] = useState('');
-    //essa lista foi criada fora da página em que está a requisição axios pq ela é usada em outra página filha também
-    const [seatList, setSeatList] = useState(null);
-
-    const seatInfos = {
-        //mandei essa ref para não permitir o usuario comprar de novo sem antes voltar para a página home
-        filmNameRef: filmNameRef,
-
-        buyedTickets: buyedTickets, 
-        setBuyedTickets: setBuyedTickets,
-        buyerName: buyerName,
-        setBuyerName: setBuyerName, 
-        buyerCPF: buyerCPF,
-        setBuyerCPF: setBuyerCPF,
-        seatList: seatList,
-        setSeatList: setSeatList
-    }
-    const sucessInfos = {
-        filmNameRef: filmNameRef,
-        filmDayRef: filmDayRef, 
-        filmTimeRef: filmTimeRef, 
-        buyedTickets: buyedTickets,
-        setBuyedTickets: setBuyedTickets,
-        buyerName: buyerName,
-        setBuyerName: setBuyerName,
-        buyerCPF: buyerCPF,
-        setBuyerCPF: setBuyerCPF,
-        seatList: seatList,
-    }
 
     return (
         <>
@@ -68,8 +36,8 @@ export default function App() {
             <Routes>
                 <Route path='/' element={<HomePage filmNameRef={filmNameRef}/>}/>
                 <Route path='/sessoes/:idSession' element={<SessionsPage filmDayRef={filmDayRef} filmTimeRef={filmTimeRef}/>}/> 
-                <Route path='/assentos/:idSeat' element={<SeatsPage seatInfos={seatInfos}/>}/>
-                <Route path='/sucesso' element={<SuccessPage sucessInfos={sucessInfos}/>}/>
+                <Route path='/assentos/:idSeat' element={<SeatsPage/>}/>
+                <Route path='/sucesso' element={<SuccessPage filmNameRef={filmNameRef} filmDayRef={filmDayRef} filmTimeRef={filmTimeRef}/>}/>
             </Routes>
         </>
     )

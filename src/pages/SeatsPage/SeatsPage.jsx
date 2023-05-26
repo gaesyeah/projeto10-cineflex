@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import Loading from "../../style/Loading";
 import loadingGif from "./../../assets/loading.gif";
+import sucessLoading from "./../../assets/sucessLoading.gif";
 import Seat from "../../components/Seat";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { cpf } from "cpf-cnpj-validator";
 import axios from "axios";
-import { useRef } from "react";
 
-export default function SeatsPage({ seatInfos }) {
-    const { filmNameRef, buyedTickets, setBuyedTickets, buyerName, setBuyerName, buyerCPF, setBuyerCPF, seatList, setSeatList } = seatInfos;
+export default function SeatsPage() {
+
+    const [buyerName, setBuyerName] = useState('');
+    const [buyerCPF, setBuyerCPF] = useState('');
+    const [buyedTickets, setBuyedTickets] = useState([]);
+    const [seatList, setSeatList] = useState(null);
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
 
     const {idSeat} = useParams();
@@ -19,12 +25,17 @@ export default function SeatsPage({ seatInfos }) {
         .catch(error => alert(error.response.data))
     }, []);
 
-    function confirmPurchase(){
-        if (!filmNameRef.current){
-            alert('para fazer uma nova compra volte para a página inicial');
-        } else {
-            navigate('/sucesso');
-        }
+    function submitPurchase(e){
+        e.preventDefault();
+        setLoading(true);
+
+        const userReserve = {ids: buyedTickets, name: buyerName, cpf: buyerCPF}
+        axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
+        .then(() => {
+            setLoading(false);
+            navigate('/sucesso', {state: {seatList, buyedTickets, buyerName, buyerCPF}});
+        })
+        .catch(error => {alert(error.response.data)})
     }
     //-------------------------------------------------------------------
     const firstCPFchange = useRef(false);
@@ -65,6 +76,11 @@ export default function SeatsPage({ seatInfos }) {
 
         return (
             <PageContainer>
+                {loading &&
+                    <SucessLoading>
+                        <img src={sucessLoading} alt='sucessLoading'/>
+                    </SucessLoading>
+                }
                 Selecione o(s) assento(s)
     
                 <SeatsContainer>
@@ -99,17 +115,19 @@ export default function SeatsPage({ seatInfos }) {
                     </CaptionItem>
                 </CaptionContainer>
     
-                <FormContainer>
-                    Nome do Comprador:
+                <FormContainer onSubmit={submitPurchase}>
+                    <label htmlFor='nome'>Nome do Comprador:</label>
                     <input
+                        id='nome'
                         placeholder="Digite seu nome..."
                         value={buyerName}
                         onChange={(e) => setBuyerName(e.target.value)}
                         data-test="client-name"
                     />
                     {validateName()}
-                    CPF do Comprador:
+                    <label htmlFor='cpf'>CPF do Comprador:</label>
                     <input
+                        id='cpf'
                         placeholder="Digite seu CPF..."
                         value={cpf.format(buyerCPF)}
                         onChange={(e) => setBuyerCPF(e.target.value)}
@@ -118,7 +136,7 @@ export default function SeatsPage({ seatInfos }) {
                     {validateCPF()}
                     <button  
                         disabled={(!buyerName || !cpf.isValid(buyerCPF) || buyedTickets.length === 0) ? true : false}
-                        onClick={confirmPurchase}
+                        type='submit'
                         data-test="book-seat-btn"
                     >Reservar Assento
                     </button>
@@ -139,6 +157,18 @@ export default function SeatsPage({ seatInfos }) {
     }
 }
 
+const SucessLoading = styled.div`
+    margin-top: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    img{
+        width: 115px;
+    }
+`
 const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -160,7 +190,7 @@ const SeatsContainer = styled.div`
     justify-content: center;
     margin-top: 20px;
 `
-const FormContainer = styled.div`
+const FormContainer = styled.form`
     width: calc(100vw - 40px); 
     display: flex;
     flex-direction: column;
