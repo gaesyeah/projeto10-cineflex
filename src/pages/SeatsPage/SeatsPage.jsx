@@ -42,7 +42,7 @@ export default function SeatsPage({filmNameRef}) {
             axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', userReserve)
             .then(() => {
                 setSubmitLoading(false);
-                navigate('/sucesso', {state: {seatList, buyedTickets, buyerName, buyerCPF}});
+                navigate('/sucesso', {state: {seatList, userReserve}});
             })
             .catch(error => {
                 const {message} = error.response.data;

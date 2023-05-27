@@ -2,6 +2,7 @@ import { cpf } from "cpf-cnpj-validator";
 import { useEffect } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+const cpfFormat = cpf;
 
 export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
     if (useLocation().state === null){
@@ -11,7 +12,8 @@ export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
         return <Navigate to="/"/>
     }
 
-    const {seatList, buyedTickets, buyerName, buyerCPF} = useLocation().state;
+    const {seatList, userReserve}  = useLocation().state;
+    const {ids, name, cpf} = userReserve;
 
     const navigate = useNavigate();
 
@@ -33,7 +35,7 @@ export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
             <TextContainer data-test="seats-info">
                 <strong><p>Ingressos</p></strong>
                 {seatList.seats.map(seat => {
-                    if (buyedTickets.includes(seat.id)){
+                    if (ids.includes(seat.id)){
                         return (
                             <p key={seat.id}>
                                 Assento {seat.name.padStart(2, '0')}
@@ -45,8 +47,8 @@ export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
 
             <TextContainer data-test="client-info">
                 <strong><p>Comprador</p></strong>
-                <p>Nome: {buyerName}</p>
-                <p>CPF: {cpf.format(buyerCPF)}</p>
+                <p>Nome: {name}</p>
+                <p>CPF: {cpfFormat.format(cpf)}</p>
             </TextContainer>
 
                 <button 
