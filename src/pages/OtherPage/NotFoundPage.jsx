@@ -1,6 +1,6 @@
-import error from './../../assets/404.png'
-import OtherPage from './Style';
 import { useNavigate } from "react-router-dom";
+import error from './../../assets/404.png';
+import OtherPage from './Style';
 
 export default function NotFoundPage() {
 

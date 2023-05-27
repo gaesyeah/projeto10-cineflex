@@ -1,10 +1,10 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Session from "../../components/Session";
 import Loading from "../../style/Loading";
 import loadingGif from "./../../assets/loading.gif";
-import Session from "../../components/Session";
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 
 export default function SessionsPage({filmDayRef, filmTimeRef}) {
 

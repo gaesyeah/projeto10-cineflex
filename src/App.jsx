@@ -1,14 +1,14 @@
+import axios from "axios";
+import { useRef } from "react";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import backArrow from "./assets/backArrow.png";
-import NotFoundPage from "./pages/OtherPage/NotFoundPage";
-import ErrorPage from "./pages/OtherPage/ErrorPage";
 import HomePage from "./pages/HomePage/HomePage";
-import SessionsPage from "./pages/SessionsPage/SessionsPage";
+import ErrorPage from "./pages/OtherPage/ErrorPage";
+import NotFoundPage from "./pages/OtherPage/NotFoundPage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
+import SessionsPage from "./pages/SessionsPage/SessionsPage";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
-import { useRef } from "react";
-import axios from "axios";
-import {Routes, Route, useNavigate, useLocation, Navigate} from "react-router-dom";
 
 export default function App() {
 

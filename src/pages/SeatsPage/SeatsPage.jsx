@@ -1,12 +1,12 @@
+import axios from "axios";
+import { cpf } from "cpf-cnpj-validator";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Seat from "../../components/Seat";
 import Loading from "../../style/Loading";
 import loadingGif from "./../../assets/loading.gif";
 import sucessLoading from "./../../assets/sucessLoading.gif";
-import Seat from "../../components/Seat";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
-import { cpf } from "cpf-cnpj-validator";
-import axios from "axios";
 
 export default function SeatsPage({filmNameRef}) {
 

@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { cpf } from "cpf-cnpj-validator";
 import { useEffect } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 export default function SuccessPage({filmNameRef, filmDayRef, filmTimeRef}) {
     if (useLocation().state === null){

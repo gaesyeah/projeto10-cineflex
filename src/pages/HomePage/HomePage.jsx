@@ -1,10 +1,10 @@
-import Film from "../../components/Film.jsx";
-import styled from "styled-components";
-import Loading from "../../style/Loading.jsx";
-import loadingGif from "../../assets/loading.gif";
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import loadingGif from "../../assets/loading.gif";
+import Film from "../../components/Film.jsx";
+import Loading from "../../style/Loading.jsx";
 
 export default function HomePage({filmNameRef}) {
 
